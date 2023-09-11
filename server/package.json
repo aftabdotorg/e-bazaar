@@ -1,0 +1,26 @@
+{
+  "name": "e-bazaar-server",
+  "version": "1.0.0",
+  "description": "server for e-bazaar website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "Mongo",
+    "Express",
+    "Node",
+    "JWT"
+  ],
+  "author": "Aftab Akhand",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.1"
+  }
+}
