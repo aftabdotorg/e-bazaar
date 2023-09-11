@@ -1,0 +1,102 @@
+import {
+  faCartShopping,
+  faEye,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import styled from "styled-components";
+import { medium, mobile, tablet } from "../../utils/responsive";
+import { NavLink } from "react-router-dom";
+
+const Image = styled.img`
+  /* width: 60%; */
+  height: 60%;
+  /* object-fit: cover; */
+  z-index: 3;
+  border-radius: 50%;
+`;
+const Info = styled.div`
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  z-index: 4;
+  color: #572064;
+  background-color: rgba(0, 0, 0, 0.1);
+`;
+
+const Container = styled.div`
+  flex: 1;
+  margin: 5px;
+  min-width: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #fae6fa;
+
+  &:hover ${Info} {
+    opacity: 1;
+  }
+
+  /* ${tablet({
+    minWidth: "100px",
+    height: "200px",
+  })}
+
+  ${mobile({
+    minWidth: "280px",
+    height: "350px",
+  })} */
+`;
+
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.1);
+  }
+`;
+
+const ProductCard = ({ item }) => {
+  return (
+    <Container>
+      <Image src={item.img} alt={item.id} />
+      <Info>
+        <NavLink to={`/products/:id`} className="no_decoration">
+          <Icon>
+            <FontAwesomeIcon icon={faEye} />{" "}
+          </Icon>
+        </NavLink>
+        <NavLink to="/cart" className="no_decoration">
+          <Icon>
+            <FontAwesomeIcon icon={faCartShopping} />{" "}
+          </Icon>
+        </NavLink>
+        <Icon>
+          <FontAwesomeIcon icon={faHeart} />{" "}
+        </Icon>
+      </Info>
+    </Container>
+  );
+};
+
+export default ProductCard;
