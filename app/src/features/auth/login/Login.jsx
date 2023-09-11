@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Form, Input, Text, InputSubmit } from "../Signup/Signup";
-import { Heading } from "../../components/Featuredproducts/FeaturedProducts";
+import { Heading } from "../../../components/Featuredproducts/FeaturedProducts";
 import { NavLink } from "react-router-dom";
 
 const Login = () => {
@@ -13,9 +13,10 @@ const Login = () => {
         <InputSubmit type="submit" value="Login" />
         <Text>
           Existing User?
-            <NavLink className="no_decoration" to="/register">{" "}
-              Sign up
-            </NavLink>
+          <NavLink className="no_decoration" to="/register">
+            {" "}
+            Sign up
+          </NavLink>
         </Text>
       </Form>
     </Container>

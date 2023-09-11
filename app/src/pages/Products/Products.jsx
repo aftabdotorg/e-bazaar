@@ -24,7 +24,7 @@ const Left = styled.div`
 const Right = styled.div`
   flex: 3;
   /* padding: 1rem; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 const FilterContainers = styled.div`
   padding: 1rem;

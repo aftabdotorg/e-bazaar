@@ -44,7 +44,7 @@ const Container = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   justify-content: center;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   margin: auto;
 
   ${tablet({

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Heading } from "../../components/Featuredproducts/FeaturedProducts";
+import { Heading } from "../../../components/Featuredproducts/FeaturedProducts";
 import { NavLink } from "react-router-dom";
 
 export const Container = styled.div`

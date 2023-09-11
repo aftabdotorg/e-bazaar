@@ -6,7 +6,7 @@ import styled from "styled-components";
 import "./Card.css";
 
 const Container = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: auto;
   width: 250px;
   display: flex;
