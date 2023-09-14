@@ -9,4 +9,13 @@ const createProduct = async (req, res) => {
   }
 };
 
-export default createProduct;
+const getAllProducts = async (req, res) => {
+  try {
+    const products = Product.find({});
+    return res.status(201).json(newProduct);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+export  {createProduct};

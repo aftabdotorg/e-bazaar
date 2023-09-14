@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ProductCard from "../ProductCard/ProductCard";
-import { productsArr } from "../../utils/data";
+import { featuredData } from "../../utils/data";
 import { medium, mobile, tablet } from "../../utils/responsive";
 
 
@@ -41,7 +41,7 @@ const FeaturedProducts = () => {
     <Container>
       <Heading>Featured Products</Heading>
       <Wrapper>
-        {productsArr.map((item) => (
+        {featuredData.map((item) => (
           <ProductCard item={item} key={item.id} />
         ))}
       </Wrapper>

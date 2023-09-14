@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
-import createProduct from "./controller/Product.js";
+import productRoutes from "./routes/Products.js";
 const app = express();
 const PORT = 8080;
 
 app.use(express.json());
+app.use("/products", productRoutes);
 
 const connectDB = async () => {
   try {
@@ -21,7 +22,6 @@ app.get("/", (req, res) => {
   res.json({ status: "success" });
 });
 
-app.post("/products", createProduct);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

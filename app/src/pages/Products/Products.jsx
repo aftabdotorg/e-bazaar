@@ -24,7 +24,7 @@ const Left = styled.div`
 const Right = styled.div`
   flex: 3;
   /* padding: 1rem; */
-  /* border: 1px solid black; */
+  border: 1px solid black;
 `;
 const FilterContainers = styled.div`
   padding: 1rem;
@@ -92,6 +92,7 @@ const ProductBanner = styled.img`
   object-fit: cover;
   filter: brightness(50%);
   border-radius: 7px;
+
 `;
 
 const Info = styled.div`

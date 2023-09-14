@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-
+import { products } from "../../utils/data";
 import Card from "../../components/Card/Card";
 import { medium, mobile, tablet } from "../../utils/responsive";
 
@@ -63,7 +63,7 @@ const Container = styled.div`
 const ProductList = () => {
   return (
     <Container>
-      {data.map((item) => (
+      {products.map((item) => (
         <Card item={item} key={item.id} />
       ))}
     </Container>

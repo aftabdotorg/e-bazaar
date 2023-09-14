@@ -25,11 +25,11 @@ const ImageParent = styled.div`
   overflow: hidden;
   position: relative;
 
-  &:hover {
+  /* &:hover {
     .img2 {
       z-index: 2;
     }
-  }
+  } */
 `;
 
 const Image = styled.img`
@@ -92,9 +92,9 @@ const Card = ({ item }) => {
     <Container>
       <NavLink to={`/products/:id`} className="no_decoration">
         <ImageParent className="image_parent">
-          <Image src={item.img} alt={item.title} className="img1" />
+          <Image src={item.thumbnail} alt={item.title} className="img1" />
 
-          <Image src={item.img2} alt={item.title} className="img2" />
+          {/* <Image src={item.img2} alt={item.title} className="img2" /> */}
         </ImageParent>
       </NavLink>
       <Title>{item.title}</Title>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { medium } from "../../utils/responsive";
 
 const Container = styled.div`
   padding: 1rem;
@@ -17,18 +18,23 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* margin: auto; */
-  gap: 10px;
+  /* gap: 10px; */
   /* justify-content: center; */
   align-items: start;
+  margin: 1rem;
   /* border: 1px solid blue; */
 `;
 
 const Flexer = styled.div`
   display: flex;
   gap: 2rem;
+
+  ${medium({
+    flexWrap: "wrap",
+  })}
 `;
 
-const AddressBox = styled.div``
+const AddressBox = styled.div``;
 
 const Label = styled.label``;
 
@@ -41,9 +47,9 @@ const Select = styled.select`
   /* margin: auto; */
 `;
 
-const Button = styled.button`
-  
-`
+const Button = styled.button``;
+
+const Text = styled.p``;
 
 const CheckoutPage = () => {
   return (
@@ -92,22 +98,38 @@ const CheckoutPage = () => {
             <Input />
           </InputContainer>
         </Flexer>
-      <Button>Save</Button>
       </Form>
 
       <h3>Saved Addresses</h3>
       <InputContainer>
-        <input type="radio" name="" id="" />
-        <AddressBox>
-          <div>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-          </div>
-          <div></div>
-        </AddressBox>
+        <Flexer>
+          <input type="radio" name="" id="" />
+          <AddressBox>
+            <Text>name</Text>
+            <Text>email</Text>
+            <Text>phone</Text>
+            <div></div>
+          </AddressBox>
+        </Flexer>
       </InputContainer>
+
+      <h3>Payment Methods</h3>
+      <InputContainer>
+        <Flexer>
+          <input type="radio" name="paymentmode" id="card" />
+          <label htmlFor="card">Card</label>
+        </Flexer>
+        <Flexer>
+          <input type="radio" name="paymentmode" id="netbanking" />
+          <label htmlFor="netbanking">Net banking</label>
+        </Flexer>
+        <Flexer>
+          <input type="radio" name="paymentmode" id="cash" />
+          <label htmlFor="cash">Cash on delivery</label>
+        </Flexer>
+      </InputContainer>
+
+      <Button>Save & proceed</Button>
     </Container>
   );
 };

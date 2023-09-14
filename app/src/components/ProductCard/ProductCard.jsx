@@ -10,9 +10,9 @@ import { medium, mobile, tablet } from "../../utils/responsive";
 import { NavLink } from "react-router-dom";
 
 const Image = styled.img`
-  /* width: 60%; */
-  height: 60%;
-  /* object-fit: cover; */
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   z-index: 3;
   border-radius: 50%;
 `;
@@ -79,7 +79,7 @@ const Icon = styled.div`
 const ProductCard = ({ item }) => {
   return (
     <Container>
-      <Image src={item.img} alt={item.id} />
+      <Image src={item.thumbnail} alt={item.id} />
       <Info>
         <NavLink to={`/products/:id`} className="no_decoration">
           <Icon>

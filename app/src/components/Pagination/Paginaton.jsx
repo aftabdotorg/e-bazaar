@@ -4,6 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { medium } from "../../utils/responsive";
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -11,6 +12,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
+
+  ${medium({
+    gap: "1px",
+  })}
 `;
 
 const Button = styled.button`

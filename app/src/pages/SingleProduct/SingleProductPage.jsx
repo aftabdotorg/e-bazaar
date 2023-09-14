@@ -21,29 +21,38 @@ const Wrapper = styled.div`
 
 const ImgContainer = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 50vh;
-  object-fit: cover;
+  border: 1px solid black;
+  border-radius: 7px;
+  width: 350px;
+  height: 200px;
+  /* width: 100%; */
+  /* height: 50vh; */
+  object-fit: contain;
 
-  ${tablet({
+  /* ${tablet({
     height: "50vh",
   })}
- 
- ${medium({
+
+  ${medium({
     height: "40vh",
   })}
  
  ${mobile({
     height: "30vh",
-  })}
+  })} */
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 0px 50px;
+  padding: 10px 50px;
   /* ${mobile({ padding: "10px" })} */
 `;
 
@@ -136,6 +145,9 @@ const SingleProductPage = () => {
     <Container>
       <Wrapper>
         <ImgContainer>
+          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
           <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
         </ImgContainer>
         <InfoContainer>
