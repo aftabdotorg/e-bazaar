@@ -310,28 +310,52 @@ const ProductList = () => {
   const products = useSelector(selectAllProducts);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
+  const [sort, setSort] = useState({});
+  const [page, setPage] = useState(1) 
 
+  // HANDLE FILTER FUNCTION
   const handleFilter = (e, ele, item) => {
-    const newFilter = { ...filter, [ele.id]: item.value };
+    console.log(e.target.checked);
+    const newFilter = { ...filter };
+
+    if (e.target.checked) {
+      if (newFilter[ele.id]) {
+        newFilter[ele.id].push(item.value);
+      } else {
+        newFilter[ele.id] = [item.value];
+      }
+    } else {
+      const index = newFilter[ele.id].findIndex((el) => el === item.value);
+      newFilter[ele.id].splice(index, 1);
+    }
+    console.log({ newFilter });
+
     setFilter(newFilter);
-    dispatch(fetchProductsByFilterAsync(newFilter));
-    console.log(ele.id, item.value);
   };
 
+  // HANDLE SORT FUNCTION
   const handleSort = (e, sortBy) => {
-    const newFilter = { ...filter, _sort: sortBy.sort, _order: sortBy.order };
-    setFilter(newFilter);
-    dispatch(fetchProductsByFilterAsync(newFilter));
-    // console.log(ele.id, item.value);
+    const sort = { _sort: sortBy.sort, _order: sortBy.order };
+    console.log({ sort });
+    setSort(sort);
   };
+  
+  // HANDLE PAGE FUNCTION
+  // const handleSort = (e, sortBy) => {
+  //   const sort = { _sort: sortBy.sort, _order: sortBy.order };
+  //   console.log({ sort });
+  //   setSort(sort);
+  // };
 
   useEffect(() => {
-    dispatch(fetchAllProductsAsync());
-  }, [dispatch]);
+    dispatch(fetchProductsByFilterAsync({ filter, sort }));
+  }, [dispatch, filter, sort]);
 
   return (
     <Container>
+      {/* LEFT SECTION */}
       <Left>
+        {/* SORTING */}
         <FilterContainers>
           <SubHeading>Sort by</SubHeading>
           {sortBy.map((sortBy, i) => (
@@ -346,11 +370,10 @@ const ProductList = () => {
               <label htmlFor={sortBy.name}>{sortBy.name}</label>
             </FilterInputParent>
           ))}
-          {/* <FilterInputParent className="input_parent">
-            <input type="radio" name="price" id="desc" value="desc" />
-            <label htmlFor="desc">High to Low</label>
-          </FilterInputParent> */}
         </FilterContainers>
+        {/* SORTING END */}
+
+        {/* FILTERING */}
         {filters.map((ele) => (
           <FilterContainers key={ele.id}>
             {/* {console.log(ele.id)} */}
@@ -369,6 +392,9 @@ const ProductList = () => {
             ))}
           </FilterContainers>
         ))}
+        {/* FILTERING END */}
+
+        {/* PRICE FILTERING */}
         <FilterContainers>
           <SubHeading>Filter by price</SubHeading>
           <FilterInputParent className="input_parent">
@@ -377,9 +403,13 @@ const ProductList = () => {
             <span>10000</span>
           </FilterInputParent>
         </FilterContainers>
+        {/* PRICE FILTERING END */}
       </Left>
+      {/* LEFT SECTION END */}
 
+      {/* RIGHT SECTION */}
       <Right>
+        {/* PRODUCTS BANNER */}
         <BannerContainer>
           <ProductBanner
             src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -389,13 +419,21 @@ const ProductList = () => {
             <Title>Products</Title>
           </Info>
         </BannerContainer>
+        {/* PRODUCTS BANNER END */}
+
+        {/* PRODUCTS GRID */}
         <GridContainer>
           {products.map((item) => (
             <Card item={item} key={item.id} />
           ))}
         </GridContainer>
+        {/* PRODUCTS GRID END */}
+
+        {/* PAGINATION */}
         <Paginaton />
+        {/* PAGINATION END */}
       </Right>
+      {/* RIGHT SECTION END */}
     </Container>
   );
 };
