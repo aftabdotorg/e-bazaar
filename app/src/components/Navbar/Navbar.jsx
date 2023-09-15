@@ -19,7 +19,10 @@ const NavContainer = styled.div`
   background-color: #fff;
 
   ${medium({ height: "180px" })}
-  ${mobile({ backgroundColor: "#572064" })}
+  ${mobile({
+    // backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
+    backgroundColor: "#572064"
+  })}
 `;
 
 const Wrapper = styled.div`
@@ -127,6 +130,7 @@ const MenuItem = styled.div`
 ${mobile({
     width: "auto",
     border: "2px solid white",
+    // backgroundColor:"transparent"
   })}
 `;
 
@@ -135,6 +139,14 @@ const Navbar = () => {
     <NavContainer>
       <Wrapper>
         <Left>
+          {/* <MenuItem
+            style={{
+              backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
+              color: "white",
+            }}
+          >
+            E-Bazaar
+          </MenuItem> */}
           <Image src="https://i.ibb.co/FhmM4wC/e-bazaar-logo.png" alt="logo" />
           <NavLink to={`/`} className="no_decoration">
             <MenuItem>Home</MenuItem>

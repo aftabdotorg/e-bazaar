@@ -79,7 +79,7 @@ const Icon = styled.div`
 const ProductCard = ({ item }) => {
   return (
     <Container>
-      <Image src={item.thumbnail} alt={item.id} />
+      <Image src={item.img} alt={item.id} />
       <Info>
         <NavLink to={`/products/:id`} className="no_decoration">
           <Icon>

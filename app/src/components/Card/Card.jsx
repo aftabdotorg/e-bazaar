@@ -1,9 +1,10 @@
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Card.css";
+import { products } from "../../utils/data";
 
 const Container = styled.div`
   /* border: 1px solid black; */
@@ -35,7 +36,7 @@ const ImageParent = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   position: absolute;
   border-radius: 7px;
 `;
@@ -46,22 +47,23 @@ const Title = styled.h3`
   padding-left: 10px;
 `;
 const PriceParent = styled.div`
-  padding-left: 10px;
+  /* padding-left: 10px; */
   display: flex;
+  justify-content: space-around;
   gap: 1rem;
 `;
 
 const Text = styled.p`
   font-weight: 500;
 
-  &:first-child {
+  &:last-child{
     color: gray;
     text-decoration: line-through;
   }
 
-  &:last-child {
+  /* &:last-child {
     color: black;
-  }
+  } */
 `;
 
 const BtnContainer = styled.div`
@@ -99,7 +101,13 @@ const Card = ({ item }) => {
       </NavLink>
       <Title>{item.title}</Title>
       <PriceParent>
-        <Text>₹ {item.oldPrice}</Text>
+        <Text>
+          <FontAwesomeIcon icon={faStar} style={{ color: "#5c176b" }} />{" "}
+          {item.rating}
+        </Text>
+        <Text>
+          ₹ {Math.round(item.price * (1 - item.discountPercentage / 100))}
+        </Text>
         <Text>₹ {item.price}</Text>
       </PriceParent>
       <BtnContainer>
