@@ -9,6 +9,7 @@ import {
   fetchProductsByFilterAsync,
   selectAllProducts,
 } from "./productListSlice";
+import { ITEMS_PER_PAGE } from "../../store/constants";
 
 const filters = [
   {
@@ -311,7 +312,7 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
-  const [page, setPage] = useState(1) 
+  const [page, setPage] = useState(1);
 
   // HANDLE FILTER FUNCTION
   const handleFilter = (e, ele, item) => {
@@ -339,17 +340,17 @@ const ProductList = () => {
     console.log({ sort });
     setSort(sort);
   };
-  
+
   // HANDLE PAGE FUNCTION
-  // const handleSort = (e, sortBy) => {
-  //   const sort = { _sort: sortBy.sort, _order: sortBy.order };
-  //   console.log({ sort });
-  //   setSort(sort);
-  // };
+  const handlePagination = ( page) => {
+    console.log({page});
+    setPage(page);
+  };
 
   useEffect(() => {
-    dispatch(fetchProductsByFilterAsync({ filter, sort }));
-  }, [dispatch, filter, sort]);
+    const paginationObj = { _page: page, _limit: ITEMS_PER_PAGE };
+    dispatch(fetchProductsByFilterAsync({ filter, sort, paginationObj }));
+  }, [dispatch, filter, sort, page]);
 
   return (
     <Container>
@@ -430,7 +431,7 @@ const ProductList = () => {
         {/* PRODUCTS GRID END */}
 
         {/* PAGINATION */}
-        <Paginaton />
+        <Paginaton page={page} setPage={setPage} handlePagination={handlePagination} />
         {/* PAGINATION END */}
       </Right>
       {/* RIGHT SECTION END */}

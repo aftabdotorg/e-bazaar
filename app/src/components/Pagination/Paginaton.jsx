@@ -5,6 +5,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { medium } from "../../utils/responsive";
+import { ITEMS_PER_PAGE } from "../../store/constants";
 
 const Container = styled.div`
   margin-top: 1rem;
@@ -14,44 +15,73 @@ const Container = styled.div`
   gap: 1rem;
 
   ${medium({
-    gap: "1px",
+    gap: "7px",
   })}
 `;
 
+const Span = styled.span`
+  color: white;
+  background-color: #572064;
+  border-radius: 7px;
+  padding: 5px 10px;
+  cursor: pointer;
+`;
+
 const Button = styled.button`
+  border-radius: 7px;
   padding: 5px 10px;
   font-family: inherit;
   border: none;
   font-weight: bold;
   outline: none;
-  border-radius: 7px;
   border: 1px solid #572064;
   color: #572064;
   background-color: #fff;
   cursor: pointer;
 
-  &:first-child,
+  /* &:first-child,
   &:last-child {
     color: white;
     background-color: #572064;
-  }
+  } */
 `;
 
-const Paginaton = () => {
-  const pages = [1, 2, 3, 4, 5, 6];
+const Center = styled.p`
+  padding: 0.5rem 1rem;
+  width: max-content;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  margin-top: 10px;
+  border-radius: 7px;
+`;
 
+const Paginaton = ({ page, setPage, handlePagination, totalItems = 70 }) => {
+  console.log(page, ITEMS_PER_PAGE);
   return (
-    <Container>
-      <Button>
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </Button>
-      {pages.map((ele, id) => (
-        <Button key={id}>{ele}</Button>
-      ))}
-      <Button>
-        <FontAwesomeIcon icon={faChevronRight} />
-      </Button>
-    </Container>
+    <>
+      <Center>
+        Showing {(page - 1) * ITEMS_PER_PAGE + 1} to {page * ITEMS_PER_PAGE} of{" "}
+        {totalItems} results
+      </Center>
+      <Container>
+        <Span>
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </Span>
+        {Array.from({ length: Math.ceil(totalItems / ITEMS_PER_PAGE) }).map(
+          (ele, i) => (
+            <Button onClick={(e) => handlePagination(i + 1)} key={i}>
+              {i + 1}
+            </Button>
+          )
+        )}
+        <Span>
+          <FontAwesomeIcon icon={faChevronRight} />
+        </Span>
+      </Container>
+    </>
   );
 };
 

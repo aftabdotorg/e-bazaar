@@ -20,7 +20,7 @@ export function fetchProductsByFilter(filter, sort, pagination) {
     queryStr += `${key}=${sort[key]}&`;
   }
   for (let key in pagination) {
-    queryStr += `${key}=${pagination[key]}&`;
+    queryStr += `${key}=${sort[key]}&`;
   }
 
   return new Promise(async (resolve) => {
