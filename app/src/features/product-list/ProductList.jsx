@@ -11,6 +11,7 @@ import {
   selectTotalItems,
 } from "./productListSlice";
 import { ITEMS_PER_PAGE } from "../../store/constants";
+import { searchquery } from "../../components/Navbar/navbarSlice";
 
 const filters = [
   {
@@ -311,10 +312,12 @@ const GridContainer = styled.div`
 const ProductList = () => {
   const products = useSelector(selectAllProducts);
   const totalItems = useSelector(selectTotalItems);
+  const query = useSelector(searchquery);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
+  console.log(query);
 
   // HANDLE FILTER FUNCTION
   const handleFilter = (e, ele, item) => {
@@ -350,13 +353,16 @@ const ProductList = () => {
   };
 
   useEffect(() => {
+    const searchQuery = { q: query };
     const paginationObj = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByFilterAsync({ filter, sort, paginationObj }));
-  }, [dispatch, filter, sort, page]);
+    dispatch(
+      fetchProductsByFilterAsync({ filter, sort, paginationObj, searchQuery })
+    );
+  }, [dispatch, filter, sort, page, query]);
 
   useEffect(() => {
-    setPage(1)
-  }, [totalItems, sort])
+    setPage(1);
+  }, [totalItems, sort]);
 
   return (
     <Container>

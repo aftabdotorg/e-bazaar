@@ -9,6 +9,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
+import { useDispatch } from "react-redux";
+import { setSearch } from "./navbarSlice";
+import { debounce } from "lodash";
 
 const NavContainer = styled.div`
   height: 60px;
@@ -21,7 +24,7 @@ const NavContainer = styled.div`
   ${medium({ height: "180px" })}
   ${mobile({
     // backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
-    backgroundColor: "#572064"
+    backgroundColor: "#572064",
   })}
 `;
 
@@ -135,6 +138,12 @@ ${mobile({
 `;
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const handleChange = debounce((e) => {
+    dispatch(setSearch(e.target.value));
+  }, 1000);
+
   return (
     <NavContainer>
       <Wrapper>
@@ -157,7 +166,7 @@ const Navbar = () => {
         </Left>
         <Center>
           <SearchContainer>
-            <Input placeholder="search for watch..." />
+            <Input placeholder="search for watch..." onChange={handleChange} />
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="purple hand_cursor"
