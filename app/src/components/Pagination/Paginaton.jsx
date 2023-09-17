@@ -39,6 +39,11 @@ const Button = styled.button`
   background-color: #fff;
   cursor: pointer;
 
+  /* &:focus {
+    background-color: #572064;
+    color: #fff;
+  } */
+
   /* &:first-child,
   &:last-child {
     color: white;
@@ -58,26 +63,36 @@ const Center = styled.p`
   border-radius: 7px;
 `;
 
-const Paginaton = ({ page, setPage, handlePagination, totalItems = 70 }) => {
-  console.log(page, ITEMS_PER_PAGE);
+const Paginaton = ({ page, setPage, handlePagination, totalItems }) => {
   return (
     <>
       <Center>
-        Showing {(page - 1) * ITEMS_PER_PAGE + 1} to {page * ITEMS_PER_PAGE} of{" "}
-        {totalItems} results
+        Showing {(page - 1) * ITEMS_PER_PAGE + 1} to{" "}
+        {page * ITEMS_PER_PAGE > totalItems
+          ? totalItems
+          : page * ITEMS_PER_PAGE}{" "}
+        of {totalItems} results
       </Center>
       <Container>
-        <Span>
+        <Span onClick={() => setPage(page >= 1 ? page - 1 : null)}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </Span>
         {Array.from({ length: Math.ceil(totalItems / ITEMS_PER_PAGE) }).map(
           (ele, i) => (
-            <Button onClick={(e) => handlePagination(i + 1)} key={i}>
+            <Button
+              onClick={(e) => handlePagination(i + 1)}
+              key={i}
+              style={
+                i + 1 === page
+                  ? { backgroundColor: "#572064", color:"#fff" }
+                  : { backgroundColor: "white", color:"#572064" }
+              }
+            >
               {i + 1}
             </Button>
           )
         )}
-        <Span>
+        <Span onClick={() => setPage(page + 1)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </Span>
       </Container>
