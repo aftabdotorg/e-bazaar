@@ -92,7 +92,7 @@ const Button = styled.button`
 const Card = ({ item }) => {
   return (
     <Container>
-      <NavLink to={`/products/:id`} className="no_decoration">
+      <NavLink to={`/products/${item.id}`} className="no_decoration">
         <ImageParent className="image_parent">
           <Image src={item.thumbnail} alt={item.title} className="img1" />
 

@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import { Heading } from "../../Featuredproducts/FeaturedProducts";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { createUserAsync, selectLoggedUser } from "../authSlice";
 
 export const Container = styled.div`
   background-color: #fae6fa;
@@ -59,24 +62,88 @@ export const Text = styled.p`
 `;
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedUser);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  console.log(errors);
   return (
-    <Container>
-      <Form>
-        <Heading>Sign up</Heading>
-        <Input placeholder="Enter Name" type="name" />
-        <Input placeholder="Enter Email" type="email" />
-        <Input type="password" placeholder="Enter password" />
-        <Input type="password" placeholder="Confirm password" />
-        <InputSubmit type="submit" value="Sign up" />
-        <Text>
-          Existing User?
+    <>
+      {user && <Navigate to={"/"} replace={true}></Navigate>}
+      <Container>
+        <Form
+          onSubmit={handleSubmit((data) => {
+            dispatch(
+              createUserAsync({
+                name: data.name,
+                email: data.email,
+                password: data.password,
+              })
+            );
+          })}
+        >
+          <Heading>Sign up</Heading>
+          <Input
+            placeholder="Enter Name"
+            {...register("name", { required: "Name required" })}
+            type="name"
+            // required
+          />
+          <p style={{ color: "red" }}>{errors?.name?.message}</p>
+          <Input
+            placeholder="Enter Email"
+            {...register("email", {
+              required: "email required",
+              pattern: {
+                value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                message: "email invalid",
+              },
+            })}
+            type="email"
+            // required
+          />
+          <p style={{ color: "red" }}>{errors?.email?.message}</p>
+          <Input
+            type="password"
+            placeholder="Enter password"
+            {...register("password", {
+              required: "password required",
+              pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                // message: "password doesn't match criteria",
+                message: "8 char, 1 uc, 1 lc, 1 num, 1 sc",
+              },
+            })}
+            // required
+          />
+          <p style={{ color: "red" }}>{errors?.password?.message}</p>
+          <Input
+            type="password"
+            placeholder="Confirm password"
+            {...register("confirmpassword", {
+              required: "confirm password required",
+              validate: (value, formValues) =>
+                value === formValues.password || "password doesn't match",
+            })}
+            // required
+          />
+          <p style={{ color: "red" }}>{errors?.confirmpassword?.message}</p>
+          <InputSubmit type="submit" value="Sign up" />
+          <Text>
+            Existing User?
             <NavLink className="no_decoration" to="/login">
               {" "}
               Login
             </NavLink>
-        </Text>
-      </Form>
-    </Container>
+          </Text>
+        </Form>
+      </Container>
+    </>
   );
 };
 

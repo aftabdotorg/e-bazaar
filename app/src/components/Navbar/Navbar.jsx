@@ -2,6 +2,8 @@ import {
   faCartShopping,
   faMagnifyingGlass,
   faRightToBracket,
+  faSignOut,
+  faUser,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,9 +11,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "./navbarSlice";
 import { debounce } from "lodash";
+import { selectLoggedUser } from "../auth/authSlice";
 
 const NavContainer = styled.div`
   height: 60px;
@@ -42,9 +45,8 @@ const Wrapper = styled.div`
     flexDirection: "column",
     // width: "100%",
     // justifyContent: "",
-  })}
-  /* ${mobile({ flexWrap: "wrap" })} */
-  `;
+  })} /* ${mobile({ flexWrap: "wrap" })} */
+`;
 
 const Left = styled.div`
   flex: 1;
@@ -53,17 +55,18 @@ const Left = styled.div`
   align-items: center;
   gap: 25px;
   /* border: 1px solid black; */
-  
+
   ${tablet({ justifyContent: "center", gap: "5px" })}
-  ${medium({ width: "100%", justifyContent: "space-evenly" })}
-  /* ${mobile({ flexWrap: "wrap" })} */
-  `;
+  ${medium({ width: "100%", justifyContent: "space-evenly" })} /* ${mobile({
+    flexWrap: "wrap",
+  })} */
+`;
 
 const Image = styled.img`
   width: 120px;
   border-radius: 7px;
   cursor: pointer;
-  
+
   ${mobile({ border: "2px solid gold" })}
 `;
 
@@ -72,7 +75,7 @@ const Center = styled.div`
   /* border: 1px solid black; */
   ${tablet({ display: "flex", justifyContent: "center", flex: "0.5" })}
   ${medium({ width: "90%", justifyContent: "space-around", order: "1" })}
-  `;
+`;
 
 const SearchContainer = styled.div`
   border: 0.5px solid #713d7e;
@@ -102,8 +105,9 @@ const Right = styled.div`
   align-items: center;
   gap: 25px;
   ${tablet({ justifyContent: "center", gap: "5px" })}
-  ${medium({ width: "100%", justifyContent: "space-evenly" })}
-  /* ${mobile({ flexWrap: "wrap" })} */
+  ${medium({ width: "100%", justifyContent: "space-evenly" })} /* ${mobile({
+    flexWrap: "wrap",
+  })} */
 `;
 
 const MenuItem = styled.div`
@@ -142,6 +146,7 @@ ${mobile({
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedUser);
 
   const handleChange = debounce((e) => {
     dispatch(setSearch(e.target.value));
@@ -193,16 +198,33 @@ const Navbar = () => {
               </sup>
             </MenuItem>
           </NavLink>
-          <NavLink to={`/register`} className="no_decoration">
-            <MenuItem>
-              Sign up <FontAwesomeIcon icon={faUserPlus} />
-            </MenuItem>
-          </NavLink>
-          <NavLink to={`/login`} className="no_decoration">
-            <MenuItem>
-              Sign in <FontAwesomeIcon icon={faRightToBracket} />
-            </MenuItem>
-          </NavLink>
+          {user ? (
+            <NavLink to={`/`} className="no_decoration">
+              <MenuItem>
+                Profile <FontAwesomeIcon icon={faUser} />
+              </MenuItem>
+            </NavLink>
+          ) : (
+            <NavLink to={`/register`} className="no_decoration">
+              <MenuItem>
+                Sign up <FontAwesomeIcon icon={faUserPlus} />
+              </MenuItem>
+            </NavLink>
+          )}
+
+          {user ? (
+            <NavLink to={`/login`} className="no_decoration">
+              <MenuItem>
+                Logout <FontAwesomeIcon icon={faSignOut} />
+              </MenuItem>
+            </NavLink>
+          ) : (
+            <NavLink to={`/login`} className="no_decoration">
+              <MenuItem>
+                Sign in <FontAwesomeIcon icon={faRightToBracket} />
+              </MenuItem>
+            </NavLink>
+          )}
         </Right>
       </Wrapper>
     </NavContainer>
