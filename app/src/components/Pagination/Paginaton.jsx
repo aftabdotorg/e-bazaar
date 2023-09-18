@@ -9,13 +9,14 @@ import { ITEMS_PER_PAGE } from "../../store/constants";
 
 const Container = styled.div`
   margin-top: 1rem;
-  padding: 1rem 0;
+  padding: 5px 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 10px;
 
   ${medium({
-    gap: "7px",
+    gap: "3px",
   })}
 `;
 
@@ -64,6 +65,8 @@ const Center = styled.p`
 `;
 
 const Paginaton = ({ page, setPage, handlePagination, totalItems }) => {
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
   return (
     <>
       <Center>
@@ -74,25 +77,23 @@ const Paginaton = ({ page, setPage, handlePagination, totalItems }) => {
         of {totalItems} results
       </Center>
       <Container>
-        <Span onClick={() => setPage(page >= 1 ? page - 1 : null)}>
+        <Span onClick={(e) => handlePagination(page > 1 ? page - 1 : page)}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </Span>
-        {Array.from({ length: Math.ceil(totalItems / ITEMS_PER_PAGE) }).map(
-          (ele, i) => (
-            <Button
-              onClick={(e) => handlePagination(i + 1)}
-              key={i}
-              style={
-                i + 1 === page
-                  ? { backgroundColor: "#572064", color:"#fff" }
-                  : { backgroundColor: "white", color:"#572064" }
-              }
-            >
-              {i + 1}
-            </Button>
-          )
-        )}
-        <Span onClick={() => setPage(page + 1)}>
+        {Array.from({ length: totalPages }).map((ele, i) => (
+          <Button
+            onClick={(e) => handlePagination(i + 1)}
+            key={i}
+            style={
+              i + 1 === page
+                ? { backgroundColor: "#572064", color: "#fff" }
+                : { backgroundColor: "white", color: "#572064" }
+            }
+          >
+            {i + 1}
+          </Button>
+        ))}
+        <Span onClick={(e) => handlePagination(page < totalPages ? page + 1 : page)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </Span>
       </Container>

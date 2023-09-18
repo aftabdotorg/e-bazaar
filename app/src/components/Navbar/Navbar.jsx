@@ -43,7 +43,8 @@ const Wrapper = styled.div`
     // width: "100%",
     // justifyContent: "",
   })}
-`;
+  /* ${mobile({ flexWrap: "wrap" })} */
+  `;
 
 const Left = styled.div`
   flex: 1;
@@ -52,16 +53,17 @@ const Left = styled.div`
   align-items: center;
   gap: 25px;
   /* border: 1px solid black; */
-
+  
   ${tablet({ justifyContent: "center", gap: "5px" })}
   ${medium({ width: "100%", justifyContent: "space-evenly" })}
-`;
+  /* ${mobile({ flexWrap: "wrap" })} */
+  `;
 
 const Image = styled.img`
   width: 120px;
   border-radius: 7px;
   cursor: pointer;
-
+  
   ${mobile({ border: "2px solid gold" })}
 `;
 
@@ -70,7 +72,7 @@ const Center = styled.div`
   /* border: 1px solid black; */
   ${tablet({ display: "flex", justifyContent: "center", flex: "0.5" })}
   ${medium({ width: "90%", justifyContent: "space-around", order: "1" })}
-`;
+  `;
 
 const SearchContainer = styled.div`
   border: 0.5px solid #713d7e;
@@ -101,6 +103,7 @@ const Right = styled.div`
   gap: 25px;
   ${tablet({ justifyContent: "center", gap: "5px" })}
   ${medium({ width: "100%", justifyContent: "space-evenly" })}
+  /* ${mobile({ flexWrap: "wrap" })} */
 `;
 
 const MenuItem = styled.div`

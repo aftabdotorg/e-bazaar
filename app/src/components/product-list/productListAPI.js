@@ -6,9 +6,14 @@ export function fetchAllProducts() {
   });
 }
 
-export function fetchProductsByFilter(filter, sort, paginationObj, searchQuery) {
+export function fetchProductsByFilter(
+  filter,
+  sort,
+  paginationObj,
+  searchQuery
+) {
   let queryStr = "";
- 
+
   for (let key in filter) {
     const categoryValues = filter[key];
     if (categoryValues.length) {
@@ -20,11 +25,11 @@ export function fetchProductsByFilter(filter, sort, paginationObj, searchQuery) 
   for (let key in sort) {
     queryStr += `${key}=${sort[key]}&`;
   }
- 
+
   for (let key in paginationObj) {
     queryStr += `${key}=${paginationObj[key]}&`;
   }
- 
+
   for (let key in searchQuery) {
     queryStr += `${key}=${searchQuery[key]}&`;
   }
@@ -37,5 +42,21 @@ export function fetchProductsByFilter(filter, sort, paginationObj, searchQuery) 
 
     resolve({ data: { products: data, totalItems: +totalItems } });
     // console.log({data});
+  });
+}
+
+export function fetchAllCategories() {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/categories");
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+export function fetchAllBrands() {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/brands");
+    const data = await response.json();
+    resolve({ data });
   });
 }
