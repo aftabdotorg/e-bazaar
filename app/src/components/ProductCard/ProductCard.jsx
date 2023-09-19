@@ -15,6 +15,12 @@ const Image = styled.img`
   object-fit: cover;
   z-index: 3;
   border-radius: 50%;
+
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+  }
 `;
 const Info = styled.div`
   opacity: 0;
@@ -80,7 +86,7 @@ const ProductCard = ({ item }) => {
   return (
     <Container>
       <Image src={item.img} alt={item.id} />
-      <Info>
+      {/* <Info>
         <NavLink to={`/products/:id`} className="no_decoration">
           <Icon>
             <FontAwesomeIcon icon={faEye} />{" "}
@@ -94,7 +100,7 @@ const ProductCard = ({ item }) => {
         <Icon>
           <FontAwesomeIcon icon={faHeart} />{" "}
         </Icon>
-      </Info>
+      </Info> */}
     </Container>
   );
 };

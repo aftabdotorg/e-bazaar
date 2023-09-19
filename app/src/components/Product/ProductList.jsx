@@ -1,8 +1,10 @@
-import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginaton from "../../components/Pagination/Paginaton";
+import styled from "styled-components";
 import Card from "../../components/Card/Card";
+import { searchquery } from "../../components/Navbar/navbarSlice";
+import Paginaton from "../../components/Pagination/Paginaton";
+import { ITEMS_PER_PAGE } from "../../store/constants";
 import { medium, mobile, tablet } from "../../utils/responsive";
 import {
   fetchAllBrandsAsync,
@@ -13,9 +15,7 @@ import {
   selectAllCategories,
   selectAllProducts,
   selectTotalItems,
-} from "./productListSlice";
-import { ITEMS_PER_PAGE } from "../../store/constants";
-import { searchquery } from "../../components/Navbar/navbarSlice";
+} from "./productSlice";
 
 const sortBy = [
   { name: "Top Ratings", sort: "rating", order: "desc", current: false },

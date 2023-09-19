@@ -1,11 +1,13 @@
+import { faMinus, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProductByIdAsync, selectProductById } from "./productListSlice";
-import { NavLink, useParams } from "react-router-dom";
+import { fetchProductByIdAsync, selectProductById } from "./productSlice";
+import { addToCartAsync } from "../cart/cartSlice";
+import { selectLoggedUser } from "../auth/authSlice";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -156,11 +158,17 @@ const ProductDetails = () => {
   const product = useSelector(selectProductById);
   console.log(product);
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedUser);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
     // console.log(product);
   }, [dispatch, params.id]);
+
+  const handleAddToCart = (e) => {
+    e.preventDefault()
+    dispatch(addToCartAsync({ ...product, quantity: 1, user: user.id }));
+  };
 
   return (
     <Container>
@@ -171,7 +179,7 @@ const ProductDetails = () => {
         <Wrapper>
           <ImgContainer>
             {product.images?.map((image, i) => (
-              <Image src={product.images[i]} alt={product.title} />
+              <Image src={product.images[i]} alt={product.title} key={i} />
             ))}
           </ImgContainer>
           <InfoContainer>
@@ -211,7 +219,7 @@ const ProductDetails = () => {
                   <FontAwesomeIcon icon={faPlus} />
                 </Amount>
               </AmountContainer>
-              <Button>ADD TO CART</Button>
+              <Button onClick={handleAddToCart}>ADD TO CART</Button>
             </AddContainer>
           </InfoContainer>
         </Wrapper>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Form, Input, Text, InputSubmit } from "../Signup/Signup";
-import { Heading } from "../../../components/Featuredproducts/FeaturedProducts";
+import { Heading } from "../../../components/Product/FeaturedProducts";
 import { NavLink, Navigate } from "react-router-dom";
 import {
   authenticateUserAsync,

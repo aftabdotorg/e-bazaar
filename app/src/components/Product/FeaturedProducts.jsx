@@ -51,6 +51,4 @@ const FeaturedProducts = () => {
 
 export default FeaturedProducts;
 
-{
-  /* <ProductCard item={item} key={item.id} /> */
-}
+

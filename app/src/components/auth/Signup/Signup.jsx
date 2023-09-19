@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Heading } from "../../Featuredproducts/FeaturedProducts";
+import { Heading } from "../../Product/FeaturedProducts";
 import { NavLink, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUserAsync, selectLoggedUser } from "../authSlice";
