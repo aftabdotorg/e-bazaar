@@ -170,10 +170,9 @@ const ProductDetails = () => {
       {product && (
         <Wrapper>
           <ImgContainer>
-            <Image src={product.images[0]} alt={product.title} />
-            <Image src={product.images[1]} alt={product.title} />
-            <Image src={product.images[2]} alt={product.title} />
-            <Image src={product.images[3]} alt={product.title} />
+            {product.images?.map((image, i) => (
+              <Image src={product.images[i]} alt={product.title} />
+            ))}
           </ImgContainer>
           <InfoContainer>
             <Title>{product.title}</Title>
