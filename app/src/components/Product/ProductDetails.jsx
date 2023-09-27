@@ -153,11 +153,11 @@ const Text = styled.p`
 `;
 
 const ProductDetails = () => {
-  const params = useParams();
-  console.log(params);
-  const product = useSelector(selectProductById);
-  console.log(product);
   const dispatch = useDispatch();
+  const params = useParams();
+  // console.log(params);
+  const product = useSelector(selectProductById);
+  // console.log(product);
   const user = useSelector(selectLoggedUser);
 
   useEffect(() => {
@@ -166,8 +166,11 @@ const ProductDetails = () => {
   }, [dispatch, params.id]);
 
   const handleAddToCart = (e) => {
-    e.preventDefault()
-    dispatch(addToCartAsync({ ...product, quantity: 1, user: user.id }));
+    e.preventDefault();
+
+    const newItem = { ...product, quantity: 1, user: user.id };
+    delete newItem['id'];
+    dispatch(addToCartAsync(newItem));
   };
 
   return (

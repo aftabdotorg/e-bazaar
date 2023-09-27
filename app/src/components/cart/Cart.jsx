@@ -3,6 +3,13 @@ import { medium, mobile } from "../../utils/responsive";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deletCartItemAsync,
+  selectCartItems,
+  updateToCartAsync,
+} from "./cartSlice";
+import { useState } from "react";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -43,18 +50,25 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
   flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const Product = styled.div`
+  background-color: #fae6fa;
   display: flex;
   justify-content: space-between;
+  border: 1px solid #572064;
   align-items: center;
   padding: 1rem;
+  border-radius: 7px;
   ${medium({ flexDirection: "column" })}
   ${mobile({ flexDirection: "column" })}
 `;
@@ -68,7 +82,9 @@ const ProductDetail = styled.div`
 `;
 
 const Image = styled.img`
-  width: 200px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
 `;
 
 const Details = styled.div`
@@ -150,6 +166,24 @@ const Button = styled.button`
   outline: none;
 `;
 const Cart = () => {
+  const products = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+  console.log("products", products);
+
+  const totalItems = products.reduce((total, item) => item.quantity + total, 0);
+  const totalPrice = products.reduce(
+    (sum, item) => item.price * item.quantity + sum,
+    0
+  );
+
+  const handleItemCount = (e, product) => {
+    dispatch(updateToCartAsync({ ...product, quantity: +e.target.value }));
+  };
+
+  const handleRemove = (e, id) => {
+    dispatch(deletCartItemAsync(id));
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -159,51 +193,68 @@ const Cart = () => {
             <TopButton>CONTINUE SHOPPING</TopButton>
           </NavLink>
           <TopTexts>
-            <TopText>Cart Items: 2</TopText>
+            <TopText>Cart Items: {products.length}</TopText>
           </TopTexts>
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <FontAwesomeIcon icon={faMinus} />
-                  <ProductAmount>2</ProductAmount>
-                  <FontAwesomeIcon icon={faPlus} />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-              <TopButton>remove</TopButton>
-            </Product>
+            {products.map((product) => (
+              <Product key={product.id}>
+                <ProductDetail>
+                  <Image src={product.thumbnail} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product.id}
+                    </ProductId>
+                    <ProductSize>
+                      <b>Size:</b> 37.5
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <select
+                      onChange={(e) => handleItemCount(e, product)}
+                      value={product.quantity}
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </ProductAmountContainer>
+                  <ProductPrice>$ {product.price}</ProductPrice>
+                </PriceDetail>
+                <TopButton onClick={(e) => handleRemove(e, product.id)}>
+                  remove
+                </TopButton>
+              </Product>
+            ))}
+
             <Hr />
           </Info>
-
 
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
+              <SummaryItemText>Total Items</SummaryItemText>
+              <SummaryItemPrice>{totalItems}</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <NavLink to={'/checkout'} className="no_decoration">
+              <Button>CHECKOUT NOW</Button>
+            </NavLink>
           </Summary>
         </Bottom>
       </Wrapper>

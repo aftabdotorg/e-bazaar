@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "./navbarSlice";
 import { debounce } from "lodash";
 import { selectLoggedUser } from "../auth/authSlice";
+import { selectCartItems } from "../cart/cartSlice";
 
 const NavContainer = styled.div`
   height: 60px;
@@ -147,6 +148,8 @@ ${mobile({
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
+  const cartItems = useSelector(selectCartItems);
+  // console.log("cart items", cartItems);
 
   const handleChange = debounce((e) => {
     dispatch(setSearch(e.target.value));
@@ -185,23 +188,25 @@ const Navbar = () => {
           <NavLink to="/cart" className="no_decoration">
             <MenuItem>
               <FontAwesomeIcon icon={faCartShopping} />
-              <sup
-                style={{
-                  marginLeft: "2px",
-                  padding: "0 4px",
-                  borderRadius: "7px",
-                  color: "white",
-                  backgroundColor: "#713d7e",
-                }}
-              >
-                0
-              </sup>
+              {cartItems.length > 0 && (
+                <sup
+                  style={{
+                    marginLeft: "2px",
+                    padding: "0 4px",
+                    borderRadius: "7px",
+                    color: "white",
+                    backgroundColor: "#713d7e",
+                  }}
+                >
+                  {cartItems.length}
+                </sup>
+              )}
             </MenuItem>
           </NavLink>
           {user ? (
             <NavLink to={`/`} className="no_decoration">
               <MenuItem>
-                Profile <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faUser} /> {user.name}
               </MenuItem>
             </NavLink>
           ) : (

@@ -5,6 +5,10 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Card.css";
 import { products } from "../../utils/data";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProductById } from "../Product/productSlice";
+import { selectLoggedUser } from "../auth/authSlice";
+import { addToCartAsync } from "../cart/cartSlice";
 
 const Container = styled.div`
   /* border: 1px solid black; */
@@ -56,7 +60,7 @@ const PriceParent = styled.div`
 const Text = styled.p`
   font-weight: 500;
 
-  &:last-child{
+  &:last-child {
     color: gray;
     text-decoration: line-through;
   }
@@ -90,6 +94,14 @@ const Button = styled.button`
 `;
 
 const Card = ({ item }) => {
+  // const product = useSelector(selectProductById);
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedUser);
+
+  const handleAddToCartPL = (item) => {
+    dispatch(addToCartAsync({ ...item, quantity: 1, user: user.id }));
+  };
+
   return (
     <Container>
       <NavLink to={`/products/${item.id}`} className="no_decoration">
@@ -114,9 +126,9 @@ const Card = ({ item }) => {
         <Button>
           <FontAwesomeIcon icon={faMinus} />
         </Button>
-        <NavLink to="/cart" className="no_decoration">
-          <Button>Add To Cart</Button>
-        </NavLink>
+        {/* <NavLink to="/cart" className="no_decoration"> */}
+        <Button onClick={() => handleAddToCartPL(item)}>Add To Cart</Button>
+        {/* </NavLink> */}
         <Button>
           <FontAwesomeIcon icon={faPlus} />
         </Button>

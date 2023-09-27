@@ -9,8 +9,20 @@ import SignupPage from "./pages/SignupPage/SignupPage";
 import CartPage from "./pages/CartPage/CartPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Protected from "./components/auth/Protected";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchCartItemsByIdAsync } from "./components/cart/cartSlice";
+import { selectLoggedUser } from "./components/auth/authSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedUser);
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCartItemsByIdAsync(user.id));
+    }
+  }, [dispatch, user]);
+
   return (
     <>
       <Header />

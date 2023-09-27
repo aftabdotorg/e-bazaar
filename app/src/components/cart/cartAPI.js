@@ -23,3 +23,37 @@ export function addToCart(item) {
     resolve({ data });
   });
 }
+
+export function fetchCartItemsById(userid) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/cart?user=" + userid);
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+export function UpdateToCart(updateItem) {
+  return new Promise(async (resolve) => {
+    const response = await fetch(
+      "http://localhost:8080/cart/" + updateItem.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updateItem),
+        headers: { "content-type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+export function deletCartItem(itemid) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/cart/" + itemid, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    });
+    const data = await response.json();
+    resolve({ data: { id: itemid } });
+  });
+}
