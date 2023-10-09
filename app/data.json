@@ -2401,18 +2401,73 @@
       "name": "test",
       "email": "test@gmail.com",
       "password": "Test@1234",
+      "addresses": [
+        {
+          "name": "test",
+          "email": "test@gmail.com",
+          "country": "Germany",
+          "address": "test lab",
+          "city": "freecity",
+          "state": "dollas",
+          "phone": "3847561384",
+          "zip": "2135213"
+        },
+        {
+          "name": "test",
+          "email": "test@gmail.com",
+          "country": "Germany",
+          "address": "test lab",
+          "city": "freecity",
+          "state": "Maharashtra",
+          "phone": "03847561384",
+          "zip": "2135213"
+        }
+      ],
       "id": 1
     },
     {
       "name": "test",
       "email": "test@gmail.com",
       "password": "Test@1234",
+      "addresses": [],
       "id": 2
     },
     {
       "name": "aftab",
       "email": "aftab@gmail.com",
       "password": "Aftab123$",
+      "addresses": [
+        {
+          "name": "aftab ",
+          "email": "aftab@gmail.com",
+          "country": "India",
+          "address": "leaf",
+          "city": "Pune",
+          "state": "Maharashtra",
+          "phone": "8605020249",
+          "zip": "0101010"
+        },
+        {
+          "name": "kakashi",
+          "email": "kakashi@gmail.com",
+          "country": "india",
+          "address": "baker street",
+          "city": "london",
+          "state": "maharashtra",
+          "phone": "9784327478",
+          "zip": "231897468"
+        },
+        {
+          "name": "kakashi",
+          "email": "kakashi@gmail.com",
+          "country": "India",
+          "address": "baker street",
+          "city": "london",
+          "state": "maharashtra",
+          "phone": "09784327478",
+          "zip": "231897468"
+        }
+      ],
       "id": 3
     }
   ],
@@ -2439,7 +2494,6 @@
       "user": 1
     },
     {
-      "id": 1,
       "title": "iPhone 9",
       "description": "An apple mobile which is nothing like apple",
       "price": 549,
@@ -2456,28 +2510,9 @@
         "https://i.dummyjson.com/data/products/1/4.jpg",
         "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
       ],
-      "quantity": 2,
-      "user": 3
-    },
-    {
-      "id": 2,
-      "title": "iPhone X",
-      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-      "price": 899,
-      "discountPercentage": 17.94,
-      "rating": 4.44,
-      "stock": 34,
-      "brand": "Apple",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/2/1.jpg",
-        "https://i.dummyjson.com/data/products/2/2.jpg",
-        "https://i.dummyjson.com/data/products/2/3.jpg",
-        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-      ],
       "quantity": 1,
-      "user": 3
+      "user": 3,
+      "id": 5
     }
   ]
 }

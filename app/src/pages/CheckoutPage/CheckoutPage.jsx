@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { medium } from "../../utils/responsive";
+import { useForm } from "react-hook-form";
+import {
+  selectLoggedUser,
+  updateUserAsync,
+} from "../../components/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
   padding: 1rem;
@@ -52,65 +58,120 @@ const Button = styled.button``;
 const Text = styled.p``;
 
 const CheckoutPage = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedUser);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  console.log(user.addresses);
+
   return (
     <Container>
       <h3>Personal Information</h3>
-      <Form>
+      <Form
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+          dispatch(
+            updateUserAsync({ ...user, addresses: [...user.addresses, data] })
+          );
+          reset();
+        })}
+      >
         <Flexer>
           <InputContainer>
-            <Label>First name</Label>
-            <Input placeholder="John" />
+            <Label htmlFor="name">Name</Label>
+            <Input
+              placeholder="minato namikaze"
+              {...register("name", { required: "name is required" })}
+            />
           </InputContainer>
           <InputContainer>
-            <Label>Last name</Label>
-            <Input placeholder="Doe" />
+            <Label htmlFor="email">Email address</Label>
+            <Input
+              placeholder="email@domain.com"
+              {...register("email", { required: "email is required" })}
+              type="email"
+            />
+          </InputContainer>
+          <InputContainer>
+            <Label htmlFor="country">Country</Label>
+            <Input
+              id="country"
+              placeholder="India"
+              {...register("country", { required: "email is required" })}
+            />
           </InputContainer>
         </Flexer>
-        <InputContainer>
-          <Label>Email address</Label>
-          <Input placeholder="email" />
-        </InputContainer>
-        <InputContainer>
-          <Label>Country</Label>
-          <Select>
-            <option value="India">India</option>
-            <option value="Germany">Germany</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="United States">United States</option>
-            <option value="Dubai">Dubai</option>
-          </Select>
-        </InputContainer>
-        <InputContainer>
-          <Label>Street Address</Label>
-          <Input />
-        </InputContainer>
         <Flexer>
           <InputContainer>
-            <Label>City</Label>
-            <Input />
+            <Label htmlFor="address">Street Address</Label>
+            <Input
+              placeholder="baker street, london"
+              {...register("address", { required: "address is required" })}
+              id="address"
+            />
           </InputContainer>
           <InputContainer>
-            <Label>State / Province</Label>
-            <Input />
+            <Label htmlFor="city">City</Label>
+            <Input
+              placeholder="london"
+              {...register("city", { required: "city is required" })}
+              id="city"
+            />
           </InputContainer>
           <InputContainer>
-            <Label>Zip / Postal code</Label>
-            <Input />
+            <Label htmlFor="state">State / Province</Label>
+            <Input
+              placeholder="maharashtra"
+              {...register("state", { required: "state is required" })}
+              id="state"
+            />
           </InputContainer>
+        </Flexer>
+        <Flexer>
+          <InputContainer>
+            <Label htmlFor="phone">Phone</Label>
+            <Input
+              placeholder="964238****"
+              {...register("phone", { required: "phone is required" })}
+              id="phone"
+              type="number"
+            />
+          </InputContainer>
+          <InputContainer>
+            <Label htmlFor="zip">Zip / Postal code</Label>
+            <Input
+              placeholder="000000"
+              {...register("zip", { required: "zip code is required" })}
+              id="zip"
+              type="number"
+            />
+          </InputContainer>
+        </Flexer>
+        <Flexer>
+          <Button>Save Address</Button>
         </Flexer>
       </Form>
 
       <h3>Saved Addresses</h3>
       <InputContainer>
-        <Flexer>
-          <input type="radio" name="" id="" />
-          <AddressBox>
-            <Text>name</Text>
-            <Text>email</Text>
-            <Text>phone</Text>
-            <div></div>
-          </AddressBox>
-        </Flexer>
+        {user.addresses.map((ele, i) => (
+          <Flexer key={i}>
+            <input type="radio" name="" id="" />
+            <AddressBox>
+              <Text>
+                {ele.name} - {ele.phone}
+              </Text>
+              <Text>
+                {ele.address} - {ele.city}.
+              </Text>
+            </AddressBox>
+          </Flexer>
+        ))}
       </InputContainer>
 
       <h3>Payment Methods</h3>
