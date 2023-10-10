@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCartItemsByIdAsync } from "./components/cart/cartSlice";
 import { selectLoggedUser } from "./components/auth/authSlice";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const App = () => {
             </Protected>
           }
         ></Route>
-        <Route path="*" element={<span>404, Page not found!</span>}></Route>
+        <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
       <Footer />
     </>
