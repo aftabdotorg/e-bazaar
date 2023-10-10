@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import "dotenv/config"
 import productRoutes from "./routes/Products.js";
 const app = express();
 const PORT = 8080;
@@ -9,9 +10,8 @@ app.use("/products", productRoutes);
 
 const connectDB = async () => {
   try {
-    // const res = await mongoose.connect(`mongodb://127.0.0.1:27017/ecommerce`);
     const res = await mongoose.connect(
-      `mongodb+srv://aftabakhand:ve2OtAtwNTo5Yn3s@cluster0.z5v40ht.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+      process.env.MONGODB_CONNECTION_STRING_ATLAS,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
