@@ -1,11 +1,11 @@
 import {
-  faChevronLeft,
-  faChevronRight,
+    faChevronLeft,
+    faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { ITEMS_PER_PAGE } from "../../utils/constants";
 import { medium } from "../../utils/responsive";
-import { ITEMS_PER_PAGE } from "../../store/constants";
 
 const Container = styled.div`
   margin-top: 1rem;

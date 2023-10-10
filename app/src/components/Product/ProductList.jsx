@@ -4,17 +4,17 @@ import styled from "styled-components";
 import Card from "../../components/Card/Card";
 import { searchquery } from "../../components/Navbar/navbarSlice";
 import Paginaton from "../../components/Pagination/Paginaton";
-import { ITEMS_PER_PAGE } from "../../store/constants";
+import { ITEMS_PER_PAGE } from "../../utils/constants";
 import { medium, mobile, tablet } from "../../utils/responsive";
 import {
-  fetchAllBrandsAsync,
-  fetchAllCategoriesAsync,
-  fetchAllProductsAsync,
-  fetchProductsByFilterAsync,
-  selectAllBrands,
-  selectAllCategories,
-  selectAllProducts,
-  selectTotalItems,
+    fetchAllBrandsAsync,
+    fetchAllCategoriesAsync,
+    fetchAllProductsAsync,
+    fetchProductsByFilterAsync,
+    selectAllBrands,
+    selectAllCategories,
+    selectAllProducts,
+    selectTotalItems,
 } from "./productSlice";
 
 const sortBy = [

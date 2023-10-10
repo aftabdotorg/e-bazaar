@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home/Home";
-import Products from "./pages/Products/Products";
-import SingleProductPage from "./pages/SingleProduct/SingleProductPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import SignupPage from "./pages/SignupPage/SignupPage";
-import CartPage from "./pages/CartPage/CartPage";
-import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import SingleProductPage from "./pages/SingleProductPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import Protected from "./components/auth/Protected";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCartItemsByIdAsync } from "./components/cart/cartSlice";
 import { selectLoggedUser } from "./components/auth/authSlice";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();

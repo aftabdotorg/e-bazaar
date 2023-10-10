@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { medium } from "../../utils/responsive";
+import { medium } from "../utils/responsive";
 import { useForm } from "react-hook-form";
 import {
   selectLoggedUser,
   updateUserAsync,
-} from "../../components/auth/authSlice";
+} from "../components/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { selectCartItems } from "../../components/cart/cartSlice";
-import { createOrderAsync } from "../../components/Orders/OrderSlice";
+import { selectCartItems } from "../components/cart/cartSlice";
+import { createOrderAsync } from "../components/Orders/OrderSlice";
 
 const Container = styled.div`
   padding: 1rem;
