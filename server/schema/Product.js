@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// product schema
 const productSchema = mongoose.Schema({
   title: { type: String, required: true, unique: true },
   description: { type: String, required: true },
@@ -27,6 +28,8 @@ const productSchema = mongoose.Schema({
   deleted: { type: Boolean, default: false },
 });
 
+
+// virtuals for converying _id to id for frontend
 const virtual = productSchema.virtual("id");
 virtual.get(function () {
   return this._id;
