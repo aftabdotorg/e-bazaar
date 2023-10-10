@@ -30,18 +30,17 @@ export const createUser = async (userData) => {
 //   }
 // };
 
-export const updateUser = async (update) => {
-  try {
-    const response = await fetch(`http://localhost:8080/users/`+update.id, {
-      method: "PATCH",
+export function updateUser(update) {
+  return new Promise(async (resolve) => {
+    const response = await fetch('http://localhost:8080/users/'+update.id, {
+      method: 'PATCH',
       body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
+      headers: { 'content-type': 'application/json' },
     });
     const data = await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
+    resolve({ data });
+  });
+}
 
 
 export function authenticateUser(loginInfo) {

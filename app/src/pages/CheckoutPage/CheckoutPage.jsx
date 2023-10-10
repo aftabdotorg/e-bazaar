@@ -6,6 +6,9 @@ import {
   updateUserAsync,
 } from "../../components/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { selectCartItems } from "../../components/cart/cartSlice";
+import { createOrderAsync } from "../../components/Orders/OrderSlice";
 
 const Container = styled.div`
   padding: 1rem;
@@ -53,28 +56,62 @@ const Select = styled.select`
   /* margin: auto; */
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  cursor: pointer;
+`;
 
 const Text = styled.p``;
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedUser);
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  console.log(user.addresses);
+
+  const user = useSelector(selectLoggedUser);
+  const selectedCartItems = useSelector(selectCartItems);
+
+  const totalItems = selectedCartItems.reduce(
+    (total, item) => item.quantity + total,
+    0
+  );
+  const totalPrice = selectedCartItems.reduce(
+    (sum, item) => item.price * item.quantity + sum,
+    0
+  );
+
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [paymentMode, setPaymentMode] = useState("cash");
+
+  const handleAddress = (e) => {
+    setSelectedAddress(user.addresses[e.target.value]);
+  };
+  const handlePayment = (e) => {
+    setPaymentMode(e.target.value);
+  };
+
+  const handlePlaceOrder = () => {
+    const newOrder = {
+      selectedCartItems,
+      totalItems,
+      totalPrice,
+      user,
+      paymentMode,
+      selectedAddress,
+    };
+
+    dispatch(createOrderAsync(newOrder));
+  };
 
   return (
     <Container>
       <h3>Personal Information</h3>
       <Form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          console.log(user.addresses);
           dispatch(
             updateUserAsync({ ...user, addresses: [...user.addresses, data] })
           );
@@ -153,7 +190,7 @@ const CheckoutPage = () => {
           </InputContainer>
         </Flexer>
         <Flexer>
-          <Button>Save Address</Button>
+          <Button type="submit">Save Address</Button>
         </Flexer>
       </Form>
 
@@ -161,7 +198,13 @@ const CheckoutPage = () => {
       <InputContainer>
         {user.addresses.map((ele, i) => (
           <Flexer key={i}>
-            <input type="radio" name="" id="" />
+            <input
+              type="radio"
+              name="address"
+              id="address"
+              value={i}
+              onChange={handleAddress}
+            />
             <AddressBox>
               <Text>
                 {ele.name} - {ele.phone}
@@ -177,20 +220,41 @@ const CheckoutPage = () => {
       <h3>Payment Methods</h3>
       <InputContainer>
         <Flexer>
-          <input type="radio" name="paymentmode" id="card" />
+          <input
+            checked={paymentMode === "card"}
+            onChange={handlePayment}
+            type="radio"
+            name="paymentmode"
+            id="card"
+            value="card"
+          />
           <label htmlFor="card">Card</label>
         </Flexer>
         <Flexer>
-          <input type="radio" name="paymentmode" id="netbanking" />
+          <input
+            checked={paymentMode === "netbank"}
+            onChange={handlePayment}
+            type="radio"
+            name="paymentmode"
+            id="netbanking"
+            value="netbank"
+          />
           <label htmlFor="netbanking">Net banking</label>
         </Flexer>
         <Flexer>
-          <input type="radio" name="paymentmode" id="cash" />
+          <input
+            checked={paymentMode === "cash"}
+            onChange={handlePayment}
+            type="radio"
+            name="paymentmode"
+            id="cash"
+            value="cash"
+          />
           <label htmlFor="cash">Cash on delivery</label>
         </Flexer>
       </InputContainer>
 
-      <Button>Save & proceed</Button>
+      <Button onClick={handlePlaceOrder}>Place Order</Button>
     </Container>
   );
 };
