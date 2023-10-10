@@ -4,7 +4,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Card.css";
-import { products } from "../../utils/data";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductById } from "../Product/productSlice";
 import { selectLoggedUser } from "../auth/authSlice";

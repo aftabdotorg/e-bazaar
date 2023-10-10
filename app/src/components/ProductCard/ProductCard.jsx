@@ -53,17 +53,7 @@ const Container = styled.div`
   &:hover ${Info} {
     opacity: 1;
   }
-
-  /* ${tablet({
-    minWidth: "100px",
-    height: "200px",
-  })}
-
-  ${mobile({
-    minWidth: "280px",
-    height: "350px",
-  })} */
-`;
+`
 
 const Icon = styled.div`
   width: 40px;
@@ -86,21 +76,6 @@ const ProductCard = ({ item }) => {
   return (
     <Container>
       <Image src={item.img} alt={item.id} />
-      {/* <Info>
-        <NavLink to={`/products/:id`} className="no_decoration">
-          <Icon>
-            <FontAwesomeIcon icon={faEye} />{" "}
-          </Icon>
-        </NavLink>
-        <NavLink to="/cart" className="no_decoration">
-          <Icon>
-            <FontAwesomeIcon icon={faCartShopping} />{" "}
-          </Icon>
-        </NavLink>
-        <Icon>
-          <FontAwesomeIcon icon={faHeart} />{" "}
-        </Icon>
-      </Info> */}
     </Container>
   );
 };

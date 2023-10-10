@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { fetchCartItemsByIdAsync } from "./components/cart/cartSlice";
 import { selectLoggedUser } from "./components/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
+import OrderPlacedPage from "./pages/OrderPlacedPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,9 +32,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            // <Protected>
             <Home />
-            // </Protected>
           }
         ></Route>
         <Route path="/products" element={<Products />}></Route>
@@ -48,6 +47,7 @@ const App = () => {
         ></Route>
         <Route path="/register" element={<SignupPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/order-placed/:id" element={<OrderPlacedPage />}></Route>
         <Route
           path="/checkout"
           element={
