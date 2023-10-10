@@ -206,7 +206,7 @@ const Checkout = () => {
                   {ele.name} - {ele.phone}
                 </Text>
                 <Text>
-                  {ele.address} - {ele.city}.
+                  {ele.address}, {ele.city}.
                 </Text>
               </AddressBox>
             </Flexer>

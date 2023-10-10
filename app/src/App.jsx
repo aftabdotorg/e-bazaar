@@ -15,6 +15,8 @@ import { fetchCartItemsByIdAsync } from "./components/cart/cartSlice";
 import { selectLoggedUser } from "./components/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderPlacedPage from "./pages/OrderPlacedPage";
+import UserProfile from "./components/User/UserProfile";
+import Logout from "./components/auth/logout/logout";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,11 +34,27 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Home />
+            <Protected>
+              <Home />
+            </Protected>
           }
         ></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/products/:id" element={<SingleProductPage />}></Route>
+        <Route
+          path="/products"
+          element={
+            <Protected>
+              <Products />
+            </Protected>
+          }
+        ></Route>
+        <Route
+          path="/products/:id"
+          element={
+            <Protected>
+              <SingleProductPage />
+            </Protected>
+          }
+        ></Route>
         <Route
           path="/cart"
           element={
@@ -48,6 +66,15 @@ const App = () => {
         <Route path="/register" element={<SignupPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/order-placed/:id" element={<OrderPlacedPage />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <Protected>
+              <UserProfile />
+            </Protected>
+          }
+        ></Route>
+        <Route path="/logout" element={<Logout />}></Route>
         <Route
           path="/checkout"
           element={

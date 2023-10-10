@@ -25,7 +25,11 @@ const NavContainer = styled.div`
   z-index: 1000;
   background-color: #fff;
 
-  ${medium({ height: "180px" })}
+  ${medium({
+     height: "180px", 
+     margin: "auto"
+     })}
+
   ${mobile({
     // backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
     backgroundColor: "#572064",
@@ -40,7 +44,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
   /* border: 1px solid black; */
 
-  ${tablet({ padding: "5px 0" })}
+  ${tablet({
+    padding: "5px 0",
+  })}
+
   ${medium({
     height: "160px",
     flexDirection: "column",
@@ -204,7 +211,7 @@ const Navbar = () => {
             </MenuItem>
           </NavLink>
           {user ? (
-            <NavLink to={`/`} className="no_decoration">
+            <NavLink to={`/profile`} className="no_decoration">
               <MenuItem>
                 <FontAwesomeIcon icon={faUser} /> {user.name}
               </MenuItem>
@@ -218,7 +225,7 @@ const Navbar = () => {
           )}
 
           {user ? (
-            <NavLink to={`/login`} className="no_decoration">
+            <NavLink to={`/logout`} className="no_decoration">
               <MenuItem>
                 Logout <FontAwesomeIcon icon={faSignOut} />
               </MenuItem>

@@ -32,16 +32,15 @@ export const createUser = async (userData) => {
 
 export function updateUser(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/users/'+update.id, {
-      method: 'PATCH',
+    const response = await fetch("http://localhost:8080/users/" + update.id, {
+      method: "PATCH",
       body: JSON.stringify(update),
-      headers: { 'content-type': 'application/json' },
+      headers: { "content-type": "application/json" },
     });
     const data = await response.json();
     resolve({ data });
   });
 }
-
 
 export function authenticateUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
@@ -59,5 +58,11 @@ export function authenticateUser(loginInfo) {
     } else {
       reject({ message: "user not found" });
     }
+  });
+}
+
+export function logoutUser(update) {
+  return new Promise(async (resolve) => {
+    resolve({ data: "success" });
   });
 }
