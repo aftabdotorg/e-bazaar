@@ -10,7 +10,6 @@ import { selectLoggedUser } from "../auth/authSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 
 const Container = styled.div`
-  /* border: 1px solid black; */
   margin: auto;
   width: 250px;
   display: flex;
@@ -28,12 +27,6 @@ const ImageParent = styled.div`
   height: 270px;
   overflow: hidden;
   position: relative;
-
-  /* &:hover {
-    .img2 {
-      z-index: 2;
-    }
-  } */
 `;
 
 const Image = styled.img`
@@ -50,7 +43,6 @@ const Title = styled.h3`
   padding-left: 10px;
 `;
 const PriceParent = styled.div`
-  /* padding-left: 10px; */
   display: flex;
   justify-content: space-around;
   gap: 1rem;
@@ -63,20 +55,15 @@ const Text = styled.p`
     color: gray;
     text-decoration: line-through;
   }
-
-  /* &:last-child {
-    color: black;
-  } */
 `;
 
 const BtnContainer = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 const Button = styled.button`
   margin: auto;
-  /* width: 60%; */
-  /* background-color: #5c176b; */
   color: #5c176b;
   border: 1px solid #5c176b;
   font-size: 15px;
@@ -93,7 +80,6 @@ const Button = styled.button`
 `;
 
 const Card = ({ item }) => {
-  // const product = useSelector(selectProductById);
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
 
@@ -106,8 +92,6 @@ const Card = ({ item }) => {
       <NavLink to={`/products/${item.id}`} className="no_decoration">
         <ImageParent className="image_parent">
           <Image src={item.thumbnail} alt={item.title} className="img1" />
-
-          {/* <Image src={item.img2} alt={item.title} className="img2" /> */}
         </ImageParent>
       </NavLink>
       <Title>{item.title}</Title>
@@ -122,15 +106,9 @@ const Card = ({ item }) => {
         <Text>₹ {item.price}</Text>
       </PriceParent>
       <BtnContainer>
-        <Button>
-          <FontAwesomeIcon icon={faMinus} />
-        </Button>
-        {/* <NavLink to="/cart" className="no_decoration"> */}
-        <Button onClick={() => handleAddToCartPL(item)}>Add To Cart</Button>
-        {/* </NavLink> */}
-        <Button>
-          <FontAwesomeIcon icon={faPlus} />
-        </Button>
+        <NavLink to={`/products/${item.id}`} className="no_decoration">
+          <Button>View Details</Button>
+        </NavLink>
       </BtnContainer>
     </Container>
   );

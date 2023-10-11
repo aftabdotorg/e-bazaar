@@ -266,16 +266,6 @@ const ProductList = () => {
         ))}
         {/* FILTERING END */}
 
-        {/* PRICE FILTERING */}
-        <FilterContainers>
-          <SubHeading>Filter by price</SubHeading>
-          <FilterInputParent className="input_parent">
-            <span>0</span>
-            <input type="range" min={0} max={10000} />
-            <span>10000</span>
-          </FilterInputParent>
-        </FilterContainers>
-        {/* PRICE FILTERING END */}
       </Left>
       {/* LEFT SECTION END */}
 
