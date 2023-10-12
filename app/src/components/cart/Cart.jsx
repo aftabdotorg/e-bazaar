@@ -10,6 +10,7 @@ import {
   updateToCartAsync,
 } from "./cartSlice";
 import { useState } from "react";
+import { discountedPrice } from "../../utils/helper";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -172,7 +173,7 @@ const Cart = () => {
 
   const totalItems = products.reduce((total, item) => item.quantity + total, 0);
   const totalPrice = products.reduce(
-    (sum, item) => item.price * item.quantity + sum,
+    (sum, item) => discountedPrice(item) * item.quantity + sum,
     0
   );
 
@@ -227,7 +228,7 @@ const Cart = () => {
                       <option value="5">5</option>
                     </select>
                   </ProductAmountContainer>
-                  <ProductPrice>$ {product.price}</ProductPrice>
+                  <ProductPrice>$ {discountedPrice(product)}</ProductPrice>
                 </PriceDetail>
                 <TopButton onClick={(e) => handleRemove(e, product.id)}>
                   remove
@@ -252,7 +253,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
             </SummaryItem>
-            <NavLink to={'/checkout'} className="no_decoration">
+            <NavLink to={"/checkout"} className="no_decoration">
               <Button>CHECKOUT NOW</Button>
             </NavLink>
           </Summary>

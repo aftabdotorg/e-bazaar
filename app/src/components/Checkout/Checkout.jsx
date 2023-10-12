@@ -10,6 +10,7 @@ import {
   selectCurrentOrder,
 } from "../Orders/OrderSlice";
 import { Navigate } from "react-router-dom";
+import { discountedPrice } from "../../utils/helper";
 
 const Container = styled.div`
   padding: 1rem;
@@ -70,7 +71,7 @@ const Checkout = () => {
     0
   );
   const totalPrice = selectedCartItems.reduce(
-    (sum, item) => item.price * item.quantity + sum,
+    (sum, item) => discountedPrice(item) * item.quantity + sum,
     0
   );
 

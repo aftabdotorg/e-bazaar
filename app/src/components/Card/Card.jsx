@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProductAsync, selectProductById } from "../Product/productSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { addToCartAsync } from "../cart/cartSlice";
+import { discountedPrice } from "../../utils/helper";
 
 const Container = styled.div`
   margin: auto;
@@ -98,7 +99,7 @@ const Card = ({ item }) => {
     <Container>
       <NavLink
         to={
-          user.role === "admin"
+          user?.role === "admin"
             ? `/admin/products/${item.id}`
             : `/products/${item.id}`
         }
@@ -116,18 +117,18 @@ const Card = ({ item }) => {
           {item.rating}
         </Text>
         <Text>
-          ₹ {Math.round(item.price * (1 - item.discountPercentage / 100))}
+          ₹ {discountedPrice(item)}
         </Text>
         <Text>₹ {item.price}</Text>
       </PriceParent>
       <BtnContainer>
-        {user.role === "admin" ? (
+        {user?.role === "admin" ? (
           <>
             <NavLink
               to={`/admin/products/${item.id}`}
               className="no_decoration"
             >
-              <Button>Modify</Button>
+              <Button>View</Button>
             </NavLink>
 
             <Button

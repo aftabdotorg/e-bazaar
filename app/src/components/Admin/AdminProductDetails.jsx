@@ -8,6 +8,7 @@ import { medium, mobile, tablet } from "../../utils/responsive";
 import { fetchProductByIdAsync, selectProductById } from "../Product/productSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import { selectLoggedUser } from "../auth/authSlice";
+import { discountedPrice } from "../../utils/helper";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -127,15 +128,15 @@ const AdminProductDetails = () => {
           <InfoContainer>
             <Title>{product.title}</Title>
             <Desc>{product.description}</Desc>
-            <Price>${product.price}</Price>
+            <Price>${discountedPrice(product)}</Price>
 
             <Text>
               <FontAwesomeIcon icon={faStar} style={{ color: "#5c176b" }} />{" "}
               {product.rating}
             </Text>
-            <AddContainer>
+            {/* <AddContainer>
               <Button onClick={handleAddToCart}>ADD TO CART</Button>
-            </AddContainer>
+            </AddContainer> */}
           </InfoContainer>
         </Wrapper>
       )}

@@ -16,6 +16,7 @@ import { setSearch } from "./navbarSlice";
 import { debounce } from "lodash";
 import { selectLoggedUser } from "../auth/authSlice";
 import { selectCartItems } from "../cart/cartSlice";
+import { selectAllOrders } from "../Orders/OrderSlice";
 
 const NavContainer = styled.div`
   height: 60px;
@@ -156,6 +157,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
   const cartItems = useSelector(selectCartItems);
+  const orders = useSelector(selectAllOrders);
   // console.log("cart items", cartItems);
 
   const handleChange = debounce((e) => {
@@ -198,30 +200,61 @@ const Navbar = () => {
           </SearchContainer>
         </Center>
         <Right>
-          <NavLink to="/cart" className="no_decoration">
-            <MenuItem>
-              <FontAwesomeIcon icon={faCartShopping} />
-              {cartItems.length > 0 && (
-                <sup
-                  style={{
-                    marginLeft: "2px",
-                    padding: "0 4px",
-                    borderRadius: "7px",
-                    color: "white",
-                    backgroundColor: "#713d7e",
-                  }}
-                >
-                  {cartItems.length}
-                </sup>
-              )}
-            </MenuItem>
-          </NavLink>
-          {user ? (
-            <NavLink to={`/profile`} className="no_decoration">
+          {user?.role === "admin" ? (
+            <NavLink to="/admin/orders" className="no_decoration">
               <MenuItem>
-                <FontAwesomeIcon icon={faUser} /> {user.name}
+                Orders
+                {orders.length > 0 && (
+                  <sup
+                    style={{
+                      marginLeft: "2px",
+                      padding: "0 4px",
+                      borderRadius: "7px",
+                      color: "white",
+                      backgroundColor: "#713d7e",
+                    }}
+                  >
+                    {orders.length}
+                  </sup>
+                )}
               </MenuItem>
             </NavLink>
+          ) : (
+            user && (
+              <NavLink to="/cart" className="no_decoration">
+                <MenuItem>
+                  <FontAwesomeIcon icon={faCartShopping} />
+                  {cartItems.length > 0 && (
+                    <sup
+                      style={{
+                        marginLeft: "2px",
+                        padding: "0 4px",
+                        borderRadius: "7px",
+                        color: "white",
+                        backgroundColor: "#713d7e",
+                      }}
+                    >
+                      {cartItems.length}
+                    </sup>
+                  )}
+                </MenuItem>
+              </NavLink>
+            )
+          )}
+          {user ? (
+            user.role === "admin" ? (
+              <NavLink to={`/admin/orders`} className="no_decoration">
+                <MenuItem>
+                  <FontAwesomeIcon icon={faUser} /> {user.name}
+                </MenuItem>
+              </NavLink>
+            ) : (
+              <NavLink to={`/profile`} className="no_decoration">
+                <MenuItem>
+                  <FontAwesomeIcon icon={faUser} /> {user.name}
+                </MenuItem>
+              </NavLink>
+            )
           ) : (
             <NavLink to={`/register`} className="no_decoration">
               <MenuItem>

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLoggedInUserOrderAsync, selectUserOrders } from "./UserSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { Navigate } from "react-router-dom";
+import { discountedPrice } from "../../utils/helper";
+import "./userProfile.css"
 
 const Container = styled.div`
   min-height: 60vh;
@@ -114,6 +116,19 @@ const UserProfile = () => {
     dispatch(fetchLoggedInUserOrderAsync(user?.id));
   }, []);
 
+  const bgcolor = (status) => {
+    switch(status){
+      case "pending":
+        return `pending`;
+      case "dispatched":
+        return `dispatched`;
+      case "delivered":
+        return `delivered`;
+      case "cancelled":
+        return `cancelled`;
+    }
+  }
+
   return (
     <Container>
       {!user && <Navigate to="/" replace={true}></Navigate>}
@@ -160,9 +175,11 @@ const UserProfile = () => {
             </h2>
             <h3
               style={{
-                fontWeight: "400",
+                fontWeight: "600",
                 textAlign: "center",
+                textTransform:"uppercase"
               }}
+              className={`${bgcolor(order.status)}`}
             >
               Order Status: {order.status}
             </h3>
@@ -187,7 +204,7 @@ const UserProfile = () => {
                   <ProductAmountContainer>
                     Qty: {product.quantity}
                   </ProductAmountContainer>
-                  <ProductPrice>$ {product.price}</ProductPrice>
+                  <ProductPrice>$ {discountedPrice(product)}</ProductPrice>
                 </PriceDetail>
               </Product>
             ))}
