@@ -6,7 +6,7 @@ import { NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
 import { fetchProductByIdAsync, selectProductById } from "./productSlice";
-import { addToCartAsync } from "../cart/cartSlice";
+import { addToCartAsync, selectCartItems } from "../cart/cartSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { discountedPrice } from "../../utils/helper";
 
@@ -17,7 +17,6 @@ const Container = styled.div`
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-
 
   ${tablet({
     flexDirection: "column",
@@ -36,7 +35,7 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   /* border: 1px solid black; */
   border-radius: 7px;
   width: 350px;
@@ -100,6 +99,7 @@ const ProductDetails = () => {
   const params = useParams();
   const product = useSelector(selectProductById);
   const user = useSelector(selectLoggedUser);
+  const cartItems = useSelector(selectCartItems);
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id));
@@ -107,10 +107,18 @@ const ProductDetails = () => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-
-    const newItem = { ...product, quantity: 1, user: user.id };
-    delete newItem['id'];
-    dispatch(addToCartAsync(newItem));
+    if (cartItems.findIndex((item) => item.productID === product.id) < 0) {
+      const newItem = {
+        ...product,
+        productID: product.id,
+        quantity: 1,
+        user: user.id,
+      };
+      delete newItem["id"];
+      dispatch(addToCartAsync(newItem));
+    } else {
+      alert("Item Already Added.");
+    }
   };
 
   return (
