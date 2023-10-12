@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Card.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProductById } from "../Product/productSlice";
+import { deleteProductAsync, selectProductById } from "../Product/productSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 
@@ -59,7 +59,10 @@ const Text = styled.p`
 
 const BtnContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+  margin: auto;
+  gap: 1rem;
 `;
 
 const Button = styled.button`
@@ -82,6 +85,14 @@ const Button = styled.button`
 const Card = ({ item }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
+  // const selectedProduct = useSelector(selectProductById)
+
+  const handleRemove = (e, id) => {
+    // e.preventDefault()
+    console.log(item);
+    dispatch(deleteProductAsync(id))
+    // console.log(id);
+  }
 
   return (
     <Container>
@@ -111,9 +122,25 @@ const Card = ({ item }) => {
       </PriceParent>
       <BtnContainer>
         {user.role === "admin" ? (
-          <NavLink to={`/admin/products/${item.id}`} className="no_decoration">
-            <Button>Modify</Button>
-          </NavLink>
+          <>
+            <NavLink
+              to={`/admin/products/${item.id}`}
+              className="no_decoration"
+            >
+              <Button>Modify</Button>
+            </NavLink>
+
+            <Button
+              style={{
+                backgroundColor: "maroon",
+                color: "white",
+              }}
+
+              onClick={(e) => handleRemove(e,item.id)}
+            >
+              Delete
+            </Button>
+          </>
         ) : (
           <NavLink to={`/products/${item.id}`} className="no_decoration">
             <Button>View Details</Button>

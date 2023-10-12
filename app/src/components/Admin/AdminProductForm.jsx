@@ -79,7 +79,7 @@ const Button = styled.button`
 const AdminProductForm = () => {
   const dispatch = useDispatch();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset, formState: {errors} } = useForm();
 
   const brands = useSelector(selectAllBrands);
   const categories = useSelector(selectAllCategories);
@@ -104,6 +104,7 @@ const AdminProductForm = () => {
           console.log(productOBJ);
 
           dispatch(AddProductAsync(productOBJ));
+          reset()
         })}
       >
         <ParentField>

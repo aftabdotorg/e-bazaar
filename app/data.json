@@ -1838,22 +1838,6 @@
         "https://i.dummyjson.com/data/products/100/3.jpg",
         "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
       ]
-    },
-    {
-      "title": "Asus tuf f17",
-      "description": "tuf gaming laptop",
-      "price": 10000,
-      "discountPercentage": 23,
-      "rating": 2,
-      "stock": 33,
-      "brand": "Apple",
-      "category": "laptops",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5UGAEgeBII2o0VSJNmJ_K1SikLSDemna8eP7gHJppTsijld3ThhYNcLM_YsRMoDXlgDU",
-      "images": [
-        "https://img.freepik.com/premium-vector/laptop-computer-with-empty-screen-illustration_349999-243.jpg",
-        "https://img.freepik.com/premium-vector/laptop-computer-with-empty-screen-illustration_349999-243.jpg"
-      ],
-      "id": 101
     }
   ],
   "featured": [
