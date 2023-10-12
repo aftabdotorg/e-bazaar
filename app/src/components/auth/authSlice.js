@@ -42,9 +42,13 @@ export const logoutUserAsync = createAsyncThunk(
 export const authenticateUserAsync = createAsyncThunk(
   "user/authenticateUser",
   async (loginInfo) => {
-    const response = await authenticateUser(loginInfo);
-    return response.data;
-    console.log(response.data);
+    try {
+      const response = await authenticateUser(loginInfo);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(response.data);
   }
 );
 

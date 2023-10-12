@@ -1,15 +1,14 @@
-export const createUser = async (userData) => {
-  try {
+export function createUser(userData) {
+  return new Promise(async (resolve) => {
     const response = await fetch(`http://localhost:8080/users`, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
+    resolve({ data });
+  });
+}
 
 // export const authenticateUser = async (loginInfo) => {
 //   try {

@@ -135,7 +135,7 @@ const Checkout = () => {
               <Input
                 id="country"
                 placeholder="India"
-                {...register("country", { required: "email is required" })}
+                {...register("country", { required: "country is required" })}
               />
             </InputContainer>
           </Flexer>

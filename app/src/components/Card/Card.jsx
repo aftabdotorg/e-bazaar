@@ -83,17 +83,21 @@ const Card = ({ item }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
 
-  const handleAddToCartPL = (item) => {
-    dispatch(addToCartAsync({ ...item, quantity: 1, user: user.id }));
-  };
-
   return (
     <Container>
-      <NavLink to={`/products/${item.id}`} className="no_decoration">
+      <NavLink
+        to={
+          user.role === "admin"
+            ? `/admin/products/${item.id}`
+            : `/products/${item.id}`
+        }
+        className="no_decoration"
+      >
         <ImageParent className="image_parent">
           <Image src={item.thumbnail} alt={item.title} className="img1" />
         </ImageParent>
       </NavLink>
+
       <Title>{item.title}</Title>
       <PriceParent>
         <Text>
@@ -106,9 +110,15 @@ const Card = ({ item }) => {
         <Text>₹ {item.price}</Text>
       </PriceParent>
       <BtnContainer>
-        <NavLink to={`/products/${item.id}`} className="no_decoration">
-          <Button>View Details</Button>
-        </NavLink>
+        {user.role === "admin" ? (
+          <NavLink to={`/admin/products/${item.id}`} className="no_decoration">
+            <Button>Modify</Button>
+          </NavLink>
+        ) : (
+          <NavLink to={`/products/${item.id}`} className="no_decoration">
+            <Button>View Details</Button>
+          </NavLink>
+        )}
       </BtnContainer>
     </Container>
   );

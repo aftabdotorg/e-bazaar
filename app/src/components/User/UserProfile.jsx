@@ -7,6 +7,10 @@ import { fetchLoggedInUserOrderAsync, selectUserOrders } from "./UserSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { Navigate } from "react-router-dom";
 
+const Container = styled.div`
+  min-height: 60vh;
+`;
+
 const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -111,7 +115,7 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       {!user && <Navigate to="/" replace={true}></Navigate>}
       <div
         style={{
@@ -132,6 +136,7 @@ const UserProfile = () => {
           </h1>
           <H3>Name : {user?.name}</H3>
           <H3>Email: {user?.email}</H3>
+          {user.role === "admin" && <H3>Role: {user?.role}</H3>}
 
           {user?.addresses.map((ele, i) => (
             <Text key={i}>
@@ -208,7 +213,7 @@ const UserProfile = () => {
           </Info>
         ))}
       </div>
-    </>
+    </Container>
   );
 };
 

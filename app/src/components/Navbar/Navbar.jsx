@@ -26,9 +26,9 @@ const NavContainer = styled.div`
   background-color: #fff;
 
   ${medium({
-     height: "180px", 
-     margin: "auto"
-     })}
+    height: "180px",
+    margin: "auto",
+  })}
 
   ${mobile({
     // backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
@@ -178,9 +178,15 @@ const Navbar = () => {
           <NavLink to={`/`} className="no_decoration">
             <MenuItem>Home</MenuItem>
           </NavLink>
-          <NavLink to={`/products`} className="no_decoration">
-            <MenuItem>Products</MenuItem>{" "}
-          </NavLink>
+          {user?.role === "admin" ? (
+            <NavLink to={`/admin/products`} className="no_decoration">
+              <MenuItem>Products</MenuItem>
+            </NavLink>
+          ) : (
+            <NavLink to={`/products`} className="no_decoration">
+              <MenuItem>Products</MenuItem>
+            </NavLink>
+          )}
         </Left>
         <Center>
           <SearchContainer>

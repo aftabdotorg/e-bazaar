@@ -67,14 +67,12 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
   return (
     <>
-      {user && <Navigate to={"/"} replace={true}></Navigate>}
+      {user && <Navigate to="/" replace={true}></Navigate>}
       <Container>
         <Form
           onSubmit={handleSubmit((data) => {
@@ -84,8 +82,10 @@ const Signup = () => {
                 email: data.email,
                 password: data.password,
                 addresses: [],
+                role: "user",
               })
             );
+            console.log(data);
           })}
         >
           <Heading>Sign up</Heading>

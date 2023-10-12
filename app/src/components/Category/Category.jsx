@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { medium } from "../../utils/responsive";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   flex: 1;
@@ -51,7 +52,9 @@ const Category = ({ item }) => {
       <Image src={item.imgUrl} alt={item.title} />
       <Info>
         <Title>{item.title}</Title>
-        <Button>Shop Now</Button>
+        <NavLink to={"/products"} className="no_decoration">
+          <Button>Shop Now</Button>
+        </NavLink>
       </Info>
     </Container>
   );

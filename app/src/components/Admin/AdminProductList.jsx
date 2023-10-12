@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Card from "../../components/Card/Card";
-import { searchquery } from "../../components/Navbar/navbarSlice";
-import Paginaton from "../../components/Pagination/Paginaton";
+import Card from "../Card/Card";
+import { searchquery } from "../Navbar/navbarSlice";
+import Paginaton from "../Pagination/Paginaton";
 import { ITEMS_PER_PAGE } from "../../utils/constants";
 import { medium, mobile, tablet } from "../../utils/responsive";
 import {
-    fetchAllBrandsAsync,
-    fetchAllCategoriesAsync,
-    fetchAllProductsAsync,
-    fetchProductsByFilterAsync,
-    selectAllBrands,
-    selectAllCategories,
-    selectAllProducts,
-    selectTotalItems,
-} from "./productSlice";
+  fetchAllBrandsAsync,
+  fetchAllCategoriesAsync,
+  fetchAllProductsAsync,
+  fetchProductsByFilterAsync,
+  selectAllBrands,
+  selectAllCategories,
+  selectAllProducts,
+  selectTotalItems,
+} from "../Product/productSlice";
+import { NavLink } from "react-router-dom";
 
 const sortBy = [
   { name: "Top Ratings", sort: "rating", order: "desc", current: false },
@@ -148,7 +149,24 @@ const GridContainer = styled.div`
   })}
 `;
 
-const ProductList = () => {
+const Button = styled.button`
+  margin: auto;
+  color: #5c176b;
+  border: 1px solid #5c176b;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #5c176b;
+    color: white;
+  }
+`;
+
+const AdminProductList = () => {
   const products = useSelector(selectAllProducts);
   const totalItems = useSelector(selectTotalItems);
   const brands = useSelector(selectAllBrands);
@@ -175,7 +193,7 @@ const ProductList = () => {
 
   // HANDLE FILTER FUNCTION
   const handleFilter = (e, ele, item) => {
-    // console.log(e.target.checked);
+    console.log(e.target.checked);
     const newFilter = { ...filter };
 
     if (e.target.checked) {
@@ -188,7 +206,7 @@ const ProductList = () => {
       const index = newFilter[ele.id].findIndex((el) => el === item.value);
       newFilter[ele.id].splice(index, 1);
     }
-    // console.log({ newFilter });
+    console.log({ newFilter });
 
     setFilter(newFilter);
   };
@@ -196,13 +214,13 @@ const ProductList = () => {
   // HANDLE SORT FUNCTION
   const handleSort = (e, sortBy) => {
     const sort = { _sort: sortBy.sort, _order: sortBy.order };
-    // console.log({ sort });
+    console.log({ sort });
     setSort(sort);
   };
 
   // HANDLE PAGE FUNCTION
   const handlePagination = (page) => {
-    // console.log({ page });
+    console.log({ page });
     setPage(page);
   };
 
@@ -223,7 +241,7 @@ const ProductList = () => {
     dispatch(fetchAllCategoriesAsync());
   }, []);
 
-  // console.log("user");
+  // console.log("admin");
 
   return (
     <Container>
@@ -267,7 +285,6 @@ const ProductList = () => {
           </FilterContainers>
         ))}
         {/* FILTERING END */}
-
       </Left>
       {/* LEFT SECTION END */}
 
@@ -282,7 +299,19 @@ const ProductList = () => {
           <Info>
             <Title>Products</Title>
           </Info>
+          <Info></Info>
         </BannerContainer>
+        <center>
+          <NavLink to="/admin/add-product"  className="no_decoration">
+            <Button
+              style={{
+                margin: "1rem",
+              }}
+            >
+              Add Product
+            </Button>
+          </NavLink>
+        </center>
         {/* PRODUCTS BANNER END */}
 
         {/* PRODUCTS GRID */}
@@ -307,4 +336,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AdminProductList;

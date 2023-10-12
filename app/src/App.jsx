@@ -17,6 +17,10 @@ import PageNotFound from "./pages/PageNotFound";
 import OrderPlacedPage from "./pages/OrderPlacedPage";
 import UserProfile from "./components/User/UserProfile";
 import Logout from "./components/auth/logout/logout";
+import ProtectedAdmin from "./components/auth/ProtectedAdmin";
+import AdminProducts from "./pages/AdminProducts";
+import AdminSingleProductPage from "./pages/AdminSingleProductPage";
+import AdminProductForm from "./components/Admin/AdminProductForm";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,6 +51,7 @@ const App = () => {
             </Protected>
           }
         ></Route>
+
         <Route
           path="/products/:id"
           element={
@@ -55,6 +60,7 @@ const App = () => {
             </Protected>
           }
         ></Route>
+
         <Route
           path="/cart"
           element={
@@ -84,6 +90,32 @@ const App = () => {
           }
         ></Route>
         <Route path="*" element={<PageNotFound />}></Route>
+
+        {/* admin routes */}
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedAdmin>
+              <AdminProducts />
+            </ProtectedAdmin>
+          }
+        ></Route>
+        <Route
+          path="/admin/products/:id"
+          element={
+            <ProtectedAdmin>
+              <AdminSingleProductPage />
+            </ProtectedAdmin>
+          }
+        ></Route>
+        <Route
+          path="/admin/add-product"
+          element={
+            <ProtectedAdmin>
+              <AdminProductForm />
+            </ProtectedAdmin>
+          }
+        ></Route>
       </Routes>
       <Footer />
     </>

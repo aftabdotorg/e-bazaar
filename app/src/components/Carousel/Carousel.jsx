@@ -4,6 +4,7 @@ import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { slides } from "../../utils/data.js";
 import { medium, mobile, tablet } from "../../utils/responsive.js";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -115,7 +116,9 @@ const Carousel = () => {
             <Image src={ele.imgUrl} alt={ele.title} />
             <Info>
               <Title>{ele.title}</Title>
-              <Button>Shop Now</Button>
+              <NavLink to={"/products"} className="no_decoration">
+                <Button>Shop Now</Button>
+              </NavLink>
             </Info>
           </ImageContainer>
         ))}
