@@ -56,9 +56,6 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -107,6 +104,4 @@ export const cartSlice = createSlice({
 });
 
 export const selectCartItems = (state) => state.cart.items;
-
-// console.log(selectProductById);
 export default cartSlice.reducer;

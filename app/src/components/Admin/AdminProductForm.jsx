@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllBrands, selectAllCategories } from "../Product/productSlice";
+import {
+  AddProductAsync,
+  selectAllBrands,
+  selectAllCategories,
+} from "../Product/productSlice";
 import { useForm } from "react-hook-form";
 
 const Container = styled.div`
@@ -89,11 +93,17 @@ const AdminProductForm = () => {
       <H1>Add New Product</H1>
       <Form
         onSubmit={handleSubmit((data) => {
-          const newProduct = { ...data };
-          newProduct.images = [newProduct.image1, newProduct.image2];
-          delete newProduct["image1"];
-          delete newProduct["image2"];
-          console.log(newProduct);
+          const productOBJ = { ...data };
+          productOBJ.price = +productOBJ.price;
+          productOBJ.discountPercentage = +productOBJ.discountPercentage;
+          productOBJ.stock = +productOBJ.stock;
+          productOBJ.rating = +productOBJ.rating;
+          productOBJ.images = [productOBJ.image1, productOBJ.image2];
+          delete productOBJ["image1"];
+          delete productOBJ["image2"];
+          console.log(productOBJ);
+
+          dispatch(AddProductAsync(productOBJ));
         })}
       >
         <ParentField>
@@ -123,7 +133,7 @@ const AdminProductForm = () => {
             {...register("price", {
               required: "price is required",
               min: 3,
-              max: 10000,
+              max: 20000,
             })}
           ></Input>
         </ParentField>

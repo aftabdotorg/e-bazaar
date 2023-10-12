@@ -48,18 +48,13 @@ export const authenticateUserAsync = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-    // console.log(response.data);
   }
 );
 
-export const userSlice = createSlice({
-  name: "user",
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(createUserAsync.pending, (state) => {
@@ -97,10 +92,6 @@ export const userSlice = createSlice({
   },
 });
 
-// export const { increment } = userSlice.actions;
-
 export const selectLoggedUser = (state) => state.auth.loggedUser;
 export const selectError = (state) => state.auth.error;
-
-// console.log(selectProductById);
-export default userSlice.reducer;
+export default authSlice.reducer;

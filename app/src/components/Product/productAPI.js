@@ -16,7 +16,7 @@ export function fetchFeatured() {
 
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/products/`+id);
+    const response = await fetch(`http://localhost:8080/products/` + id);
     const data = await response.json();
     resolve({ data });
   });
@@ -72,6 +72,20 @@ export function fetchAllCategories() {
 export function fetchAllBrands() {
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:8080/brands");
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
+// create product admin
+
+export function addProduct(productOBJ) {
+  return new Promise(async (resolve) => {
+    const response = await fetch(`http://localhost:8080/products/`, {
+      method: "POST",
+      body: JSON.stringify(productOBJ),
+      headers: { "content-type": "application/json" },
+    });
     const data = await response.json();
     resolve({ data });
   });
