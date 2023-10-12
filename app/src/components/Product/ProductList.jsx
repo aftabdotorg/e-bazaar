@@ -6,16 +6,19 @@ import { searchquery } from "../../components/Navbar/navbarSlice";
 import Paginaton from "../../components/Pagination/Paginaton";
 import { ITEMS_PER_PAGE } from "../../utils/constants";
 import { medium, mobile, tablet } from "../../utils/responsive";
+
 import {
-    fetchAllBrandsAsync,
-    fetchAllCategoriesAsync,
-    fetchAllProductsAsync,
-    fetchProductsByFilterAsync,
-    selectAllBrands,
-    selectAllCategories,
-    selectAllProducts,
-    selectTotalItems,
+  fetchAllBrandsAsync,
+  fetchAllCategoriesAsync,
+  fetchAllProductsAsync,
+  fetchProductsByFilterAsync,
+  selectAllBrands,
+  selectAllCategories,
+  selectAllProducts,
+  selectProductListStatus,
+  selectTotalItems,
 } from "./productSlice";
+import Loader from "../Loader/Loader";
 
 const sortBy = [
   { name: "Top Ratings", sort: "rating", order: "desc", current: false },
@@ -154,6 +157,7 @@ const ProductList = () => {
   const brands = useSelector(selectAllBrands);
   const categories = useSelector(selectAllCategories);
   const query = useSelector(searchquery);
+  const status = useSelector(selectProductListStatus) 
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
@@ -267,7 +271,6 @@ const ProductList = () => {
           </FilterContainers>
         ))}
         {/* FILTERING END */}
-
       </Left>
       {/* LEFT SECTION END */}
 
@@ -286,11 +289,15 @@ const ProductList = () => {
         {/* PRODUCTS BANNER END */}
 
         {/* PRODUCTS GRID */}
-        <GridContainer>
-          {products.map((item) => (
-            <Card item={item} key={item.id} />
-          ))}
-        </GridContainer>
+        {status === "loading" ? (
+          <Loader />
+        ) : (
+          <GridContainer>
+            {products.map((item) => (
+              <Card item={item} key={item.id} />
+            ))}
+          </GridContainer>
+        )}
         {/* PRODUCTS GRID END */}
 
         {/* PAGINATION */}
