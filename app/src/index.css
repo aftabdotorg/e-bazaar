@@ -13,7 +13,6 @@
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px rgb(40, 3, 65); 
-  /* border-radius: 10px; */
 }
  
 /* Handle */
@@ -29,11 +28,6 @@
 
 .purple {
   color: #572064;
-  /* color: #713d7e;
-
-  &:hover {
-    color: white;
-  } */
 }
 
 .hand_cursor {

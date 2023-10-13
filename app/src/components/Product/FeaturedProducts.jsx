@@ -18,10 +18,7 @@ const Wrapper = styled.div`
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* flex-wrap: wrap; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* gap: 2rem; */
+
   
   ${tablet({
     gridTemplateColumns: "repeat(3, 1fr)"

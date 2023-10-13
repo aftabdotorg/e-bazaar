@@ -172,7 +172,6 @@ const Cart = () => {
   const products = useSelector(selectCartItems);
   const status = useSelector(selectCartStatus);
   const dispatch = useDispatch();
-  console.log("products", products);
 
   const totalItems = products.reduce((total, item) => item.quantity + total, 0);
   const totalPrice = products.reduce(

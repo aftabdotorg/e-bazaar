@@ -23,7 +23,6 @@ export const fetchAllProductsAsync = createAsyncThunk(
   async () => {
     const response = await fetchAllProducts();
     return response.data;
-    console.log(response.data);
   }
 );
 
@@ -32,7 +31,6 @@ export const fetchProductByIdAsync = createAsyncThunk(
   async (id) => {
     const response = await fetchProductById(id);
     return response.data;
-    console.log(response.data);
   }
 );
 
@@ -41,7 +39,6 @@ export const fetchAllBrandsAsync = createAsyncThunk(
   async () => {
     const response = await fetchAllBrands();
     return response.data;
-    console.log(response.data);
   }
 );
 
@@ -50,7 +47,6 @@ export const fetchAllCategoriesAsync = createAsyncThunk(
   async () => {
     const response = await fetchAllCategories();
     return response.data;
-    console.log(response.data);
   }
 );
 
@@ -152,6 +148,7 @@ export const selectAllCategories = (state) => state.product.categories;
 export const selectAllBrands = (state) => state.product.brands;
 export const selectTotalItems = (state) => state.product.totalItems;
 export const selectProductById = (state) => state.product.selectedProduct;
-export const selectProductDetailStatus = (state) => state.product.selectedProduct.status;
+export const selectProductDetailStatus = (state) =>
+  state.product.selectedProduct.status;
 export const selectProductListStatus = (state) => state.product.status;
 export default productSlice.reducer;

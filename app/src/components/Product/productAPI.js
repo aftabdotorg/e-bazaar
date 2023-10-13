@@ -53,11 +53,9 @@ export function fetchProductsByFilter(
   return new Promise(async (resolve) => {
     const response = await fetch(`http://localhost:8080/products?` + queryStr);
     const data = await response.json();
-    // resolve({ data });
     const totalItems = await response.headers.get("X-Total-Count");
 
     resolve({ data: { products: data, totalItems: +totalItems } });
-    // console.log({data});
   });
 }
 

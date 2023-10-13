@@ -12,14 +12,12 @@ import { mobile } from "../../utils/responsive";
 const Container = styled.footer`
   background-color: #572064;
   color: #ffff;
-  /* border: 1px solid black; */
 `;
 
 const Top = styled.div`
   padding: 1rem 0;
   margin: auto;
   display: flex;
-  /* border: 1px solid white; */
   align-items: start;
   justify-content: center;
 
@@ -32,7 +30,6 @@ const Left = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  /* border: 1px solid white; */
   ${mobile({
     paddingBottom: "10px",
     width: "100%",
@@ -48,13 +45,11 @@ const Image = styled.img`
 `;
 
 const Desc = styled.p`
-  /* border: 1px solid white; */
   padding: 1rem;
   text-align: justify;
 `;
 
 const Center = styled.div`
-  /* border: 1px solid green; */
   width: 100%;
   flex: 1;
   display: flex;
@@ -76,7 +71,6 @@ const Categorylinks = styled.p`
 `;
 
 const Right = styled.div`
-  /* border: 1px solid yellow; */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -117,7 +111,6 @@ const Button = styled.button`
 `;
 
 const SocialContainer = styled.div`
-  /* border: 2px solid yellow; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,7 +121,6 @@ const SocialIcon = styled.div`
   width: 30px;
   height: 30px;
   font-size: 20px;
-  /* border: 2px solid yellow; */
   display: flex;
   justify-content: center;
   align-items: center;

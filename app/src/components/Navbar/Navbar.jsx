@@ -32,7 +32,6 @@ const NavContainer = styled.div`
   })}
 
   ${mobile({
-    // backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
     backgroundColor: "#572064",
   })}
 `;
@@ -43,7 +42,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid black; */
 
   ${tablet({
     padding: "5px 0",
@@ -52,9 +50,8 @@ const Wrapper = styled.div`
   ${medium({
     height: "160px",
     flexDirection: "column",
-    // width: "100%",
-    // justifyContent: "",
-  })} /* ${mobile({ flexWrap: "wrap" })} */
+
+  })} 
 `;
 
 const Left = styled.div`
@@ -63,12 +60,9 @@ const Left = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 25px;
-  /* border: 1px solid black; */
 
   ${tablet({ justifyContent: "center", gap: "5px" })}
-  ${medium({ width: "100%", justifyContent: "space-evenly" })} /* ${mobile({
-    flexWrap: "wrap",
-  })} */
+  ${medium({ width: "100%", justifyContent: "space-evenly" })} 
 `;
 
 const Image = styled.img`
@@ -81,7 +75,6 @@ const Image = styled.img`
 
 const Center = styled.div`
   flex: 1;
-  /* border: 1px solid black; */
   ${tablet({ display: "flex", justifyContent: "center", flex: "0.5" })}
   ${medium({ width: "90%", justifyContent: "space-around", order: "1" })}
 `;
@@ -114,9 +107,7 @@ const Right = styled.div`
   align-items: center;
   gap: 25px;
   ${tablet({ justifyContent: "center", gap: "5px" })}
-  ${medium({ width: "100%", justifyContent: "space-evenly" })} /* ${mobile({
-    flexWrap: "wrap",
-  })} */
+  ${medium({ width: "100%", justifyContent: "space-evenly" })} 
 `;
 
 const MenuItem = styled.div`
@@ -149,7 +140,6 @@ const MenuItem = styled.div`
 ${mobile({
     width: "auto",
     border: "2px solid white",
-    // backgroundColor:"transparent"
   })}
 `;
 
@@ -158,7 +148,6 @@ const Navbar = () => {
   const user = useSelector(selectLoggedUser);
   const cartItems = useSelector(selectCartItems);
   const orders = useSelector(selectAllOrders);
-  // console.log("cart items", cartItems);
 
   const handleChange = debounce((e) => {
     dispatch(setSearch(e.target.value));
@@ -168,14 +157,7 @@ const Navbar = () => {
     <NavContainer>
       <Wrapper>
         <Left>
-          {/* <MenuItem
-            style={{
-              backgroundImage: "linear-gradient(to left, #aa2774, #b661c2)",
-              color: "white",
-            }}
-          >
-            E-Bazaar
-          </MenuItem> */}
+       
           <Image src="https://i.ibb.co/FhmM4wC/e-bazaar-logo.png" alt="logo" />
           <NavLink to={`/`} className="no_decoration">
             <MenuItem>Home</MenuItem>

@@ -14,7 +14,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 60vh; */
 `;
 
 const H1 = styled.h1`
@@ -28,7 +27,6 @@ const Form = styled.form`
   flex-direction: column;
   padding: 1rem;
   border: 1px solid #572064;
-  /* border-radius: 7px; */
 
   ${medium({
     width: "100%",
@@ -48,7 +46,6 @@ const Input = styled.input`
 `;
 
 const ParentField = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -66,7 +63,6 @@ const Button = styled.button`
   font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
-  /* border-radius: 7px; */
   padding: 0.2rem 0.3rem;
   cursor: pointer;
 
@@ -84,9 +80,6 @@ const AdminProductForm = () => {
   const brands = useSelector(selectAllBrands);
   const categories = useSelector(selectAllCategories);
 
-  // console.log(categories);
-
-  console.log("in");
 
   return (
     <Container>
@@ -101,7 +94,6 @@ const AdminProductForm = () => {
           productOBJ.images = [productOBJ.image1, productOBJ.image2];
           delete productOBJ["image1"];
           delete productOBJ["image2"];
-          console.log(productOBJ);
 
           dispatch(AddProductAsync(productOBJ));
           reset()

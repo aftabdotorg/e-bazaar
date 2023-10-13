@@ -30,7 +30,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  /* position: relative; */
+
 
   ${mobile({
     flexDirection: "column",
@@ -43,8 +43,7 @@ const Left = styled.div`
 
 const Right = styled.div`
   flex: 3;
-  /* padding: 1rem; */
-  /* border: 1px solid black; */
+
 `;
 const FilterContainers = styled.div`
   padding: 1rem;
@@ -55,7 +54,6 @@ const FilterContainers = styled.div`
 `;
 
 const FilterInputParent = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   gap: 5px;
@@ -88,10 +86,8 @@ const Heading = styled.h1`
 
 const SubHeading = styled.h3`
   background-color: #fae6fa;
-  /* text-align: center; */
   font-weight: 500;
   text-transform: uppercase;
-  /* color: #572064; */
   padding-left: 3px;
 `;
 
@@ -99,7 +95,6 @@ const BannerContainer = styled.div`
   position: relative;
   height: 150px;
   padding-bottom: 1rem;
-  /* padding-left: 1rem; */
 
   ${mobile({
     display: "none",
@@ -135,7 +130,6 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   justify-content: center;
-  /* border: 1px solid blue; */
   margin: auto;
 
   ${tablet({
@@ -162,7 +156,6 @@ const ProductList = () => {
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
-  console.log(query);
 
   const filters = [
     {
@@ -179,7 +172,6 @@ const ProductList = () => {
 
   // HANDLE FILTER FUNCTION
   const handleFilter = (e, ele, item) => {
-    // console.log(e.target.checked);
     const newFilter = { ...filter };
 
     if (e.target.checked) {
@@ -192,7 +184,6 @@ const ProductList = () => {
       const index = newFilter[ele.id].findIndex((el) => el === item.value);
       newFilter[ele.id].splice(index, 1);
     }
-    // console.log({ newFilter });
 
     setFilter(newFilter);
   };
@@ -200,13 +191,11 @@ const ProductList = () => {
   // HANDLE SORT FUNCTION
   const handleSort = (e, sortBy) => {
     const sort = { _sort: sortBy.sort, _order: sortBy.order };
-    // console.log({ sort });
     setSort(sort);
   };
 
   // HANDLE PAGE FUNCTION
   const handlePagination = (page) => {
-    // console.log({ page });
     setPage(page);
   };
 
@@ -227,7 +216,6 @@ const ProductList = () => {
     dispatch(fetchAllCategoriesAsync());
   }, []);
 
-  // console.log("user");
 
   return (
     <Container>
@@ -254,7 +242,6 @@ const ProductList = () => {
         {/* FILTERING */}
         {filters.map((ele) => (
           <FilterContainers key={ele.id}>
-            {/* {console.log(ele.id)} */}
             <SubHeading>{ele.name}</SubHeading>
 
             {ele.options.map((item, i) => (

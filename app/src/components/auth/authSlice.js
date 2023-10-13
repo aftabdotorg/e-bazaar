@@ -17,7 +17,6 @@ export const createUserAsync = createAsyncThunk(
   async (userData) => {
     const response = await createUser(userData);
     return response.data;
-    // console.log(response.data);
   }
 );
 
@@ -26,7 +25,6 @@ export const updateUserAsync = createAsyncThunk(
   async (update) => {
     const response = await updateUser(update);
     return response.data;
-    // console.log(response.data);
   }
 );
 
@@ -35,7 +33,6 @@ export const logoutUserAsync = createAsyncThunk(
   async (userID) => {
     const response = await logoutUser(userID);
     return response.data;
-    // console.log(response.data);
   }
 );
 

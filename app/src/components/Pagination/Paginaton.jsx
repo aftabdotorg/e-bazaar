@@ -40,16 +40,7 @@ const Button = styled.button`
   background-color: #fff;
   cursor: pointer;
 
-  /* &:focus {
-    background-color: #572064;
-    color: #fff;
-  } */
 
-  /* &:first-child,
-  &:last-child {
-    color: white;
-    background-color: #572064;
-  } */
 `;
 
 const Center = styled.p`

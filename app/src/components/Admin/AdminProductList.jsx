@@ -30,7 +30,6 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  /* position: relative; */
 
   ${mobile({
     flexDirection: "column",
@@ -43,8 +42,7 @@ const Left = styled.div`
 
 const Right = styled.div`
   flex: 3;
-  /* padding: 1rem; */
-  /* border: 1px solid black; */
+
 `;
 const FilterContainers = styled.div`
   padding: 1rem;
@@ -179,7 +177,6 @@ const AdminProductList = () => {
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
-  console.log(query);
 
   const filters = [
     {
@@ -196,7 +193,6 @@ const AdminProductList = () => {
 
   // HANDLE FILTER FUNCTION
   const handleFilter = (e, ele, item) => {
-    console.log(e.target.checked);
     const newFilter = { ...filter };
 
     if (e.target.checked) {
@@ -209,7 +205,6 @@ const AdminProductList = () => {
       const index = newFilter[ele.id].findIndex((el) => el === item.value);
       newFilter[ele.id].splice(index, 1);
     }
-    console.log({ newFilter });
 
     setFilter(newFilter);
   };
@@ -217,13 +212,11 @@ const AdminProductList = () => {
   // HANDLE SORT FUNCTION
   const handleSort = (e, sortBy) => {
     const sort = { _sort: sortBy.sort, _order: sortBy.order };
-    console.log({ sort });
     setSort(sort);
   };
 
   // HANDLE PAGE FUNCTION
   const handlePagination = (page) => {
-    console.log({ page });
     setPage(page);
   };
 
@@ -244,7 +237,6 @@ const AdminProductList = () => {
     dispatch(fetchAllCategoriesAsync());
   }, []);
 
-  // console.log("admin");
 
   return (
     <Container>
@@ -271,7 +263,6 @@ const AdminProductList = () => {
         {/* FILTERING */}
         {filters.map((ele) => (
           <FilterContainers key={ele.id}>
-            {/* {console.log(ele.id)} */}
             <SubHeading>{ele.name}</SubHeading>
 
             {ele.options.map((item, i) => (

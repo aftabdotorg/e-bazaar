@@ -1,15 +1,3 @@
-// export const addToCart = async (item) => {
-//     try {
-//       const response = await fetch(`http://localhost:8080/cart`, {
-//         method: "POST",
-//         body: JSON.stringify(item),
-//         headers: { "content-type": "application/json" },
-//       });
-//       const data = await response.json();
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
 
 export function addToCart(item) {
   return new Promise(async (resolve) => {

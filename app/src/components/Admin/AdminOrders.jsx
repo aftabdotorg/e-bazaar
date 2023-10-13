@@ -13,7 +13,6 @@ import { discountedPrice } from "../../utils/helper";
 import Loader from "../Loader/Loader";
 
 const Container = styled.div`
-  /* min-height: 60vh; */
 `;
 
 const H3 = styled.h3`
@@ -35,7 +34,6 @@ const AdminOrders = () => {
     dispatch(updateOrderAdminAsync(updatedOrder));
   };
 
-  console.log(orders);
   return (
     <Container>
       <div

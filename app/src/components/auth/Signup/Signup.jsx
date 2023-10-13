@@ -17,11 +17,9 @@ export const Container = styled.div`
 export const Form = styled.form`
   padding: 2rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  /* border: 1px solid #572064; */
   margin: auto;
   border-radius: 7px;
   width: 500px;
-  /* height: 400px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,7 +83,6 @@ const Signup = () => {
                 role: "user",
               })
             );
-            console.log(data);
           })}
         >
           <Heading>Sign up</Heading>
@@ -93,7 +90,6 @@ const Signup = () => {
             placeholder="Enter Name"
             {...register("name", { required: "Name required" })}
             type="name"
-            // required
           />
           <p style={{ color: "red" }}>{errors?.name?.message}</p>
           <Input
@@ -106,7 +102,6 @@ const Signup = () => {
               },
             })}
             type="email"
-            // required
           />
           <p style={{ color: "red" }}>{errors?.email?.message}</p>
           <Input
@@ -116,11 +111,9 @@ const Signup = () => {
               required: "password required",
               pattern: {
                 value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
-                // message: "password doesn't match criteria",
                 message: "8 char, 1 uc, 1 lc, 1 num, 1 sc",
               },
             })}
-            // required
           />
           <p style={{ color: "red" }}>{errors?.password?.message}</p>
           <Input
@@ -131,7 +124,6 @@ const Signup = () => {
               validate: (value, formValues) =>
                 value === formValues.password || "password doesn't match",
             })}
-            // required
           />
           <p style={{ color: "red" }}>{errors?.confirmpassword?.message}</p>
           <InputSubmit type="submit" value="Sign up" />

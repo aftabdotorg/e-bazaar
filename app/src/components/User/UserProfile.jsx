@@ -30,14 +30,12 @@ const Product = styled.div`
   background-color: #fae6fa;
   display: flex;
   justify-content: space-between;
-  /* border-top: 1px solid #572064; */
   align-items: center;
   padding: 1rem;
   ${medium({ flexDirection: "column" })}
   ${mobile({ flexDirection: "column" })}
 `;
 const ProductDetail = styled.div`
-  /* border: 1px solid black; */
   flex: 2;
   display: flex;
 

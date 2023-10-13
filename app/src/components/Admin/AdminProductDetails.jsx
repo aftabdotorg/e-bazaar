@@ -37,7 +37,6 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
 box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  /* border: 1px solid black; */
   border-radius: 7px;
   width: 350px;
   height: 200px;
@@ -134,9 +133,7 @@ const AdminProductDetails = () => {
               <FontAwesomeIcon icon={faStar} style={{ color: "#5c176b" }} />{" "}
               {product.rating}
             </Text>
-            {/* <AddContainer>
-              <Button onClick={handleAddToCart}>ADD TO CART</Button>
-            </AddContainer> */}
+            
           </InfoContainer>
         </Wrapper>
       )}

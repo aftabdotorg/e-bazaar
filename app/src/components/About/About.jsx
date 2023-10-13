@@ -29,7 +29,6 @@ const Image = styled.img`
 
   ${tablet({
     width: "500px",
-    // height: "100px",
   })}
 
   ${medium({

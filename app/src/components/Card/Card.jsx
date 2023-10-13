@@ -61,7 +61,6 @@ const Text = styled.p`
 const BtnContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  /* border: 1px solid black; */
   margin: auto;
   gap: 1rem;
 `;
@@ -86,13 +85,10 @@ const Button = styled.button`
 const Card = ({ item }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
-  // const selectedProduct = useSelector(selectProductById)
 
   const handleRemove = (e, id) => {
-    // e.preventDefault()
-    console.log(item);
+
     dispatch(deleteProductAsync(id))
-    // console.log(id);
   }
 
   return (

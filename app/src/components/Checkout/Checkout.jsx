@@ -108,7 +108,6 @@ const Checkout = () => {
         <h3>Personal Information</h3>
         <Form
           onSubmit={handleSubmit((data) => {
-            console.log(user.addresses);
             dispatch(
               updateUserAsync({ ...user, addresses: [...user.addresses, data] })
             );

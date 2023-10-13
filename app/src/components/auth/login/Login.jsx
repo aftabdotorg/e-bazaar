@@ -49,7 +49,6 @@ const Login = () => {
               },
             })}
             type="email"
-            // required
           />
           <p style={{ color: "red" }}>{errors?.email?.message}</p>
           <Input
@@ -58,7 +57,6 @@ const Login = () => {
             {...register("password", {
               required: "password required",
             })}
-            // required
           />
           {error && <p style={{ color: "red" }}>{error.message}</p>}
           <InputSubmit type="submit" value="Login" />

@@ -22,10 +22,7 @@ export function updateOrderAdmin(order) {
   });
 }
 
-// export const fetchAllOrders = async () => {
-//   const response = await fetch("http://localhost:8080/orders");
-//   const data = await response.json();
-// };
+
 
 export function fetchAllOrders() {
   return new Promise(async (resolve) => {
