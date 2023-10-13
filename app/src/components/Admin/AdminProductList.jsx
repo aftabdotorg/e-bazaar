@@ -14,9 +14,11 @@ import {
   selectAllBrands,
   selectAllCategories,
   selectAllProducts,
+  selectProductListStatus,
   selectTotalItems,
 } from "../Product/productSlice";
 import { NavLink } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const sortBy = [
   { name: "Top Ratings", sort: "rating", order: "desc", current: false },
@@ -168,6 +170,7 @@ const Button = styled.button`
 
 const AdminProductList = () => {
   const products = useSelector(selectAllProducts);
+  const productStatus = useSelector(selectProductListStatus);
   const totalItems = useSelector(selectTotalItems);
   const brands = useSelector(selectAllBrands);
   const categories = useSelector(selectAllCategories);
@@ -302,7 +305,7 @@ const AdminProductList = () => {
           <Info></Info>
         </BannerContainer>
         <center>
-          <NavLink to="/admin/add-product"  className="no_decoration">
+          <NavLink to="/admin/add-product" className="no_decoration">
             <Button
               style={{
                 margin: "1rem",
@@ -315,11 +318,15 @@ const AdminProductList = () => {
         {/* PRODUCTS BANNER END */}
 
         {/* PRODUCTS GRID */}
-        <GridContainer>
-          {products.map((item) => (
-            <Card item={item} key={item.id} />
-          ))}
-        </GridContainer>
+        {productStatus === "loading" ? (
+          <Loader />
+        ) : (
+          <GridContainer>
+            {products.map((item) => (
+              <Card item={item} key={item.id} />
+            ))}
+          </GridContainer>
+        )}
         {/* PRODUCTS GRID END */}
 
         {/* PAGINATION */}

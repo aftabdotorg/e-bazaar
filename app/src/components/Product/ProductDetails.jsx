@@ -5,10 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
-import { fetchProductByIdAsync, selectProductById } from "./productSlice";
+import {
+  fetchProductByIdAsync,
+  selectProductById,
+  selectProductDetailStatus,
+  selectProductListStatus,
+} from "./productSlice";
 import { addToCartAsync, selectCartItems } from "../cart/cartSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { discountedPrice } from "../../utils/helper";
+import Loader from "../Loader/Loader";
 
 const Container = styled.div`
   min-height: 80vh;
@@ -98,6 +104,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const product = useSelector(selectProductById);
+  const productStatus = useSelector(selectProductListStatus);
   const user = useSelector(selectLoggedUser);
   const cartItems = useSelector(selectCartItems);
 
@@ -126,28 +133,31 @@ const ProductDetails = () => {
       <NavLink to={`/products`} className="no_decoration">
         <Button>Back to Products</Button>
       </NavLink>
-      {product && (
-        <Wrapper>
-          <ImgContainer>
-            {product.images?.map((image, i) => (
-              <Image src={product.images[i]} alt={product.title} key={i} />
-            ))}
-          </ImgContainer>
-          <InfoContainer>
-            <Title>{product.title}</Title>
-            <Desc>{product.description}</Desc>
-            <Price>${discountedPrice(product)}</Price>
+      {product &&
+        (productStatus === "loading" ? (
+          <Loader />
+        ) : (
+          <Wrapper>
+            <ImgContainer>
+              {product.images?.map((image, i) => (
+                <Image src={product.images[i]} alt={product.title} key={i} />
+              ))}
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{product.title}</Title>
+              <Desc>{product.description}</Desc>
+              <Price>${discountedPrice(product)}</Price>
 
-            <Text>
-              <FontAwesomeIcon icon={faStar} style={{ color: "#5c176b" }} />{" "}
-              {product.rating}
-            </Text>
-            <AddContainer>
-              <Button onClick={handleAddToCart}>ADD TO CART</Button>
-            </AddContainer>
-          </InfoContainer>
-        </Wrapper>
-      )}
+              <Text>
+                <FontAwesomeIcon icon={faStar} style={{ color: "#5c176b" }} />{" "}
+                {product.rating}
+              </Text>
+              <AddContainer>
+                <Button onClick={handleAddToCart}>ADD TO CART</Button>
+              </AddContainer>
+            </InfoContainer>
+          </Wrapper>
+        ))}
     </Container>
   );
 };

@@ -7,10 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deletCartItemAsync,
   selectCartItems,
+  selectCartStatus,
   updateToCartAsync,
 } from "./cartSlice";
 import { useState } from "react";
 import { discountedPrice } from "../../utils/helper";
+import Loader from "../Loader/Loader";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -168,6 +170,7 @@ const Button = styled.button`
 `;
 const Cart = () => {
   const products = useSelector(selectCartItems);
+  const status = useSelector(selectCartStatus);
   const dispatch = useDispatch();
   console.log("products", products);
 
@@ -198,46 +201,50 @@ const Cart = () => {
           </TopTexts>
         </Top>
         <Bottom>
-          <Info>
-            {products.map((product) => (
-              <Product key={product.id}>
-                <ProductDetail>
-                  <Image src={product.thumbnail} />
-                  <Details>
-                    <ProductName>
-                      <b>Product:</b> {product.title}
-                    </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {product.id}
-                    </ProductId>
-                    <ProductSize>
-                      <b>Size:</b> 37.5
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <select
-                      onChange={(e) => handleItemCount(e, product)}
-                      value={product.quantity}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                  </ProductAmountContainer>
-                  <ProductPrice>$ {discountedPrice(product)}</ProductPrice>
-                </PriceDetail>
-                <TopButton onClick={(e) => handleRemove(e, product.id)}>
-                  remove
-                </TopButton>
-              </Product>
-            ))}
+          {status === "loading" ? (
+            <Loader />
+          ) : (
+            <Info>
+              {products.map((product) => (
+                <Product key={product.id}>
+                  <ProductDetail>
+                    <Image src={product.thumbnail} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b> {product.id}
+                      </ProductId>
+                      <ProductSize>
+                        <b>Size:</b> 37.5
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <select
+                        onChange={(e) => handleItemCount(e, product)}
+                        value={product.quantity}
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </ProductAmountContainer>
+                    <ProductPrice>$ {discountedPrice(product)}</ProductPrice>
+                  </PriceDetail>
+                  <TopButton onClick={(e) => handleRemove(e, product.id)}>
+                    remove
+                  </TopButton>
+                </Product>
+              ))}
 
-            <Hr />
-          </Info>
+              <Hr />
+            </Info>
+          )}
 
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>

@@ -3,11 +3,17 @@ import styled from "styled-components";
 import { medium, mobile } from "../../utils/responsive";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLoggedInUserOrderAsync, selectUserOrders } from "./UserSlice";
+import {
+  fetchLoggedInUserOrderAsync,
+  selectUserOrders,
+  selectUserStatus,
+} from "./UserSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { Navigate } from "react-router-dom";
 import { discountedPrice } from "../../utils/helper";
-import "./userProfile.css"
+import "./userProfile.css";
+import { selectOrdersStatus } from "../Orders/OrderSlice";
+import Loader from "../Loader/Loader";
 
 const Container = styled.div`
   min-height: 60vh;
@@ -111,13 +117,15 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
   const orders = useSelector(selectUserOrders);
+  const orderStatus = useSelector(selectOrdersStatus);
+  const userStatus = useSelector(selectUserStatus);
 
   useEffect(() => {
     dispatch(fetchLoggedInUserOrderAsync(user?.id));
   }, []);
 
   const bgcolor = (status) => {
-    switch(status){
+    switch (status) {
       case "pending":
         return `pending`;
       case "dispatched":
@@ -127,7 +135,7 @@ const UserProfile = () => {
       case "cancelled":
         return `cancelled`;
     }
-  }
+  };
 
   return (
     <Container>
@@ -162,7 +170,7 @@ const UserProfile = () => {
             </Text>
           ))}
         </div>
-        {orders?.map((order) => (
+        {orders && orders.map((order) => (
           <Info key={order?.id}>
             <h2
               style={{
@@ -177,7 +185,7 @@ const UserProfile = () => {
               style={{
                 fontWeight: "600",
                 textAlign: "center",
-                textTransform:"uppercase"
+                textTransform: "uppercase",
               }}
               className={`${bgcolor(order.status)}`}
             >
