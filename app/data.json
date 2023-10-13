@@ -2511,6 +2511,14 @@
       ],
       "role": "user",
       "id": 4
+    },
+    {
+      "name": "sam",
+      "email": "sam@gmail.com",
+      "password": "Sam@1234",
+      "addresses": [],
+      "role": "user",
+      "id": 5
     }
   ],
   "cart": [

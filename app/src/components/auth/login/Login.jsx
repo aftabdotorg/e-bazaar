@@ -4,6 +4,7 @@ import { Heading } from "../../../components/Product/FeaturedProducts";
 import { NavLink, Navigate } from "react-router-dom";
 import {
   authenticateUserAsync,
+  selectAuthStatus,
   selectError,
   selectLoggedUser,
 } from "../authSlice";
@@ -48,7 +49,7 @@ const Login = () => {
             })}
             type="email"
           />
-          <p style={{ color: "red" }}>{errors?.email?.message}</p>
+
           <Input
             type="password"
             placeholder="Enter password"
@@ -56,7 +57,8 @@ const Login = () => {
               required: "password required",
             })}
           />
-          {error && <p style={{ color: "red" }}>{error.message}</p>}
+
+          {error && <p style={{ color: "red" }}>{error || error.message}</p>}
           <InputSubmit type="submit" value="Login" />
           <Text>
             Existing User?
