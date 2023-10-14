@@ -113,14 +113,13 @@ const ProductDetails = () => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    if (cartItems.findIndex((item) => item.productID === product.id) < 0) {
+    if (cartItems.findIndex((item) => item.product.id === product.id) < 0) {
       const newItem = {
-        ...product,
-        productID: product.id,
+       
+        product: product.id,
         quantity: 1,
         user: user.id,
       };
-      delete newItem["id"];
       dispatch(addToCartAsync(newItem));
     } else {
       alert("Item Already Added.");

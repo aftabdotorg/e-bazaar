@@ -71,7 +71,7 @@ const Checkout = () => {
     0
   );
   const totalPrice = selectedCartItems.reduce(
-    (sum, item) => discountedPrice(item) * item.quantity + sum,
+    (sum, item) => discountedPrice(item.product) * item.quantity + sum,
     0
   );
 

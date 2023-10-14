@@ -175,12 +175,12 @@ const Cart = () => {
 
   const totalItems = products.reduce((total, item) => item.quantity + total, 0);
   const totalPrice = products.reduce(
-    (sum, item) => discountedPrice(item) * item.quantity + sum,
+    (sum, item) => discountedPrice(item.product) * item.quantity + sum,
     0
   );
 
   const handleItemCount = (e, product) => {
-    dispatch(updateToCartAsync({ ...product, quantity: +e.target.value }));
+    dispatch(updateToCartAsync({ id:product.id, quantity: +e.target.value }));
   };
 
   const handleRemove = (e, id) => {
@@ -204,16 +204,16 @@ const Cart = () => {
             <Loader />
           ) : (
             <Info>
-              {products.map((product) => (
-                <Product key={product.id}>
+              {products.map((item) => (
+                <Product key={item.id}>
                   <ProductDetail>
-                    <Image src={product.thumbnail} />
+                    <Image src={item.product.thumbnail} />
                     <Details>
                       <ProductName>
-                        <b>Product:</b> {product.title}
+                        <b>Product:</b> {item.product.title}
                       </ProductName>
                       <ProductId>
-                        <b>ID:</b> {product.id}
+                        <b>ID:</b> {item.product.id}
                       </ProductId>
                       <ProductSize>
                         <b>Size:</b> 37.5
@@ -223,8 +223,8 @@ const Cart = () => {
                   <PriceDetail>
                     <ProductAmountContainer>
                       <select
-                        onChange={(e) => handleItemCount(e, product)}
-                        value={product.quantity}
+                        onChange={(e) => handleItemCount(e, item)}
+                        value={item.quantity}
                       >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -233,9 +233,9 @@ const Cart = () => {
                         <option value="5">5</option>
                       </select>
                     </ProductAmountContainer>
-                    <ProductPrice>$ {discountedPrice(product)}</ProductPrice>
+                    <ProductPrice>$ {discountedPrice(item.product)}</ProductPrice>
                   </PriceDetail>
-                  <TopButton onClick={(e) => handleRemove(e, product.id)}>
+                  <TopButton onClick={(e) => handleRemove(e, item.id)}>
                     remove
                   </TopButton>
                 </Product>
