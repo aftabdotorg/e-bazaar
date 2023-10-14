@@ -22,12 +22,7 @@ export function fetchProductById(id) {
   });
 }
 
-export function fetchProductsByFilter(
-  filter,
-  sort,
-  paginationObj,
-  searchQuery
-) {
+export function fetchProductsByFilter(filter, sort, paginationObj) {
   let queryStr = "";
 
   for (let key in filter) {
@@ -44,10 +39,6 @@ export function fetchProductsByFilter(
 
   for (let key in paginationObj) {
     queryStr += `${key}=${paginationObj[key]}&`;
-  }
-
-  for (let key in searchQuery) {
-    queryStr += `${key}=${searchQuery[key]}&`;
   }
 
   return new Promise(async (resolve) => {

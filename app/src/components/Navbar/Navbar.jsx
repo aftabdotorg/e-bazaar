@@ -12,8 +12,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { medium, mobile, tablet } from "../../utils/responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "./navbarSlice";
-import { debounce } from "lodash";
 import { selectLoggedUser } from "../auth/authSlice";
 import { selectCartItems } from "../cart/cartSlice";
 import { selectAllOrders } from "../Orders/OrderSlice";
@@ -50,8 +48,7 @@ const Wrapper = styled.div`
   ${medium({
     height: "160px",
     flexDirection: "column",
-
-  })} 
+  })}
 `;
 
 const Left = styled.div`
@@ -62,7 +59,7 @@ const Left = styled.div`
   gap: 25px;
 
   ${tablet({ justifyContent: "center", gap: "5px" })}
-  ${medium({ width: "100%", justifyContent: "space-evenly" })} 
+  ${medium({ width: "100%", justifyContent: "space-evenly" })}
 `;
 
 const Image = styled.img`
@@ -107,7 +104,7 @@ const Right = styled.div`
   align-items: center;
   gap: 25px;
   ${tablet({ justifyContent: "center", gap: "5px" })}
-  ${medium({ width: "100%", justifyContent: "space-evenly" })} 
+  ${medium({ width: "100%", justifyContent: "space-evenly" })}
 `;
 
 const MenuItem = styled.div`
@@ -149,15 +146,10 @@ const Navbar = () => {
   const cartItems = useSelector(selectCartItems);
   const orders = useSelector(selectAllOrders);
 
-  const handleChange = debounce((e) => {
-    dispatch(setSearch(e.target.value));
-  }, 1000);
-
   return (
     <NavContainer>
       <Wrapper>
         <Left>
-       
           <Image src="https://i.ibb.co/FhmM4wC/e-bazaar-logo.png" alt="logo" />
           <NavLink to={`/`} className="no_decoration">
             <MenuItem>Home</MenuItem>
@@ -174,7 +166,7 @@ const Navbar = () => {
         </Left>
         <Center>
           <SearchContainer>
-            <Input placeholder="search for watch..." onChange={handleChange} />
+            <Input placeholder="search for watch..." />
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="purple hand_cursor"

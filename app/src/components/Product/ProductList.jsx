@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Card from "../../components/Card/Card";
-import { searchquery } from "../../components/Navbar/navbarSlice";
+
 import Paginaton from "../../components/Pagination/Paginaton";
 import { ITEMS_PER_PAGE } from "../../utils/constants";
 import { medium, mobile, tablet } from "../../utils/responsive";
@@ -31,7 +31,6 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 1rem;
 
-
   ${mobile({
     flexDirection: "column",
   })}
@@ -43,7 +42,6 @@ const Left = styled.div`
 
 const Right = styled.div`
   flex: 3;
-
 `;
 const FilterContainers = styled.div`
   padding: 1rem;
@@ -150,8 +148,7 @@ const ProductList = () => {
   const totalItems = useSelector(selectTotalItems);
   const brands = useSelector(selectAllBrands);
   const categories = useSelector(selectAllCategories);
-  const query = useSelector(searchquery);
-  const status = useSelector(selectProductListStatus) 
+  const status = useSelector(selectProductListStatus);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
@@ -200,12 +197,9 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    const searchQuery = { q: query };
     const paginationObj = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(
-      fetchProductsByFilterAsync({ filter, sort, paginationObj, searchQuery })
-    );
-  }, [dispatch, filter, sort, page, query]);
+    dispatch(fetchProductsByFilterAsync({ filter, sort, paginationObj }));
+  }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
     setPage(1);
@@ -215,7 +209,6 @@ const ProductList = () => {
     dispatch(fetchAllBrandsAsync());
     dispatch(fetchAllCategoriesAsync());
   }, []);
-
 
   return (
     <Container>

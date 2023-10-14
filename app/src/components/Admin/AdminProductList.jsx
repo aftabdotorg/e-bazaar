@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Card from "../Card/Card";
-import { searchquery } from "../Navbar/navbarSlice";
 import Paginaton from "../Pagination/Paginaton";
 import { ITEMS_PER_PAGE } from "../../utils/constants";
 import { medium, mobile, tablet } from "../../utils/responsive";
@@ -172,7 +171,6 @@ const AdminProductList = () => {
   const totalItems = useSelector(selectTotalItems);
   const brands = useSelector(selectAllBrands);
   const categories = useSelector(selectAllCategories);
-  const query = useSelector(searchquery);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
@@ -221,12 +219,11 @@ const AdminProductList = () => {
   };
 
   useEffect(() => {
-    const searchQuery = { q: query };
     const paginationObj = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(
-      fetchProductsByFilterAsync({ filter, sort, paginationObj, searchQuery })
+      fetchProductsByFilterAsync({ filter, sort, paginationObj })
     );
-  }, [dispatch, filter, sort, page, query]);
+  }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
     setPage(1);
