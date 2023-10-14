@@ -78,6 +78,7 @@ const Checkout = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMode, setPaymentMode] = useState("cash");
 
+  console.log(user);
   const handleAddress = (e) => {
     setSelectedAddress(user.addresses[e.target.value]);
   };
