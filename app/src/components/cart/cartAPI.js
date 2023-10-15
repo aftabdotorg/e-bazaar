@@ -1,7 +1,7 @@
 
 export function addToCart(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart", {
+    const response = await fetch("https://e-bazaar-sage.vercel.app/cart", {
       method: "POST",
       body: JSON.stringify(item),
       headers: { "content-type": "application/json" },
@@ -14,7 +14,7 @@ export function addToCart(item) {
 
 export function fetchCartItemsById(userid) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart?user=" + userid);
+    const response = await fetch("https://e-bazaar-sage.vercel.app/cart?user=" + userid);
     const data = await response.json();
     resolve({ data });
   });
@@ -23,7 +23,7 @@ export function fetchCartItemsById(userid) {
 export function UpdateToCart(updateItem) {
   return new Promise(async (resolve) => {
     const response = await fetch(
-      "http://localhost:8080/cart/" + updateItem.id,
+      "https://e-bazaar-sage.vercel.app/cart/" + updateItem.id,
       {
         method: "PATCH",
         body: JSON.stringify(updateItem),
@@ -37,7 +37,7 @@ export function UpdateToCart(updateItem) {
 
 export function deletCartItem(itemid) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart/" + itemid, {
+    const response = await fetch("https://e-bazaar-sage.vercel.app/cart/" + itemid, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     });

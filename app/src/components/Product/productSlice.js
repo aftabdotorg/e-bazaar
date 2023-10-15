@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-  addProduct,
-  deleteProduct,
   fetchAllBrands,
   fetchAllCategories,
   fetchAllProducts,
@@ -58,12 +56,10 @@ export const fetchProductsByFilterAsync = createAsyncThunk(
       sort,
       paginationObj,
     );
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
 
-// async thunk for admin create product
 export const AddProductAsync = createAsyncThunk(
   "product/addProduct",
   async (productOBJ) => {

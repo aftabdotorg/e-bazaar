@@ -1,6 +1,6 @@
 export function fetchAllProducts() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/products");
+    const response = await fetch("https://e-bazaar-sage.vercel.app/products");
     const data = await response.json();
     resolve({ data });
   });
@@ -8,7 +8,7 @@ export function fetchAllProducts() {
 
 export function fetchFeatured() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/featured");
+    const response = await fetch("https://e-bazaar-sage.vercel.app/featured");
     const data = await response.json();
     resolve({ data });
   });
@@ -16,7 +16,7 @@ export function fetchFeatured() {
 
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/products/` + id);
+    const response = await fetch(`https://e-bazaar-sage.vercel.app/products/` + id);
     const data = await response.json();
     resolve({ data });
   });
@@ -42,7 +42,7 @@ export function fetchProductsByFilter(filter, sort, paginationObj) {
   }
 
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/products?` + queryStr);
+    const response = await fetch(`https://e-bazaar-sage.vercel.app/products?` + queryStr);
     const data = await response.json();
     const totalItems = await response.headers.get("X-Total-Count");
 
@@ -52,7 +52,7 @@ export function fetchProductsByFilter(filter, sort, paginationObj) {
 
 export function fetchAllCategories() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/categories");
+    const response = await fetch("https://e-bazaar-sage.vercel.app/categories");
     const data = await response.json();
     resolve({ data });
   });
@@ -60,7 +60,7 @@ export function fetchAllCategories() {
 
 export function fetchAllBrands() {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/brands");
+    const response = await fetch("https://e-bazaar-sage.vercel.app/brands");
     const data = await response.json();
     resolve({ data });
   });

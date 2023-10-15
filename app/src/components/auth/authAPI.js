@@ -1,6 +1,6 @@
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/auth/signup`, {
+    const response = await fetch(`https://e-bazaar-sage.vercel.app/auth/signup`, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
@@ -12,7 +12,7 @@ export function createUser(userData) {
 
 export function updateUser(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/users/" + update.id, {
+    const response = await fetch("https://e-bazaar-sage.vercel.app/users/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: { "content-type": "application/json" },
@@ -25,7 +25,7 @@ export function updateUser(update) {
 export function authenticateUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch("https://e-bazaar-sage.vercel.app/auth/login", {
         method: "POST",
         body: JSON.stringify(loginInfo),
         headers: { "content-type": "application/json" },
