@@ -97,35 +97,35 @@ All the pages are Universally responsive to all devices for.
 ### Product Detail page
 ` Authorized route `
 
-![Flixxit Home](https://i.ibb.co/dGwr1pQ/productpage.png)
+![detail](https://i.ibb.co/dGwr1pQ/productpage.png)
 
 ### Cart page
 ` Authorized route `
 
-![Flixxit Home](https://i.ibb.co/7Q6Syjb/cart.png)
+![cart](https://i.ibb.co/7Q6Syjb/cart.png)
 
 ### Checkout page
 ` Authorized route `
 
-![Flixxit Home](https://i.ibb.co/vY2N9YJ/checkoutform.png)
+![checkout](https://i.ibb.co/vY2N9YJ/checkoutform.png)
 
 ### Order placed page
 ` Authorized route `
 
-![Flixxit Home](https://i.ibb.co/DpzCVJ0/orderplaced.png)
+![ebazaar](https://i.ibb.co/DpzCVJ0/orderplaced.png)
 
 ### Profile Page 
 ` Authorized route `
 
-![Flixxit Home](https://i.ibb.co/vcJMWt5/profile.png)
+![ebazaar](https://i.ibb.co/vcJMWt5/profile.png)
 
 ### Mobile view
 
-![Flixxit Home](https://i.ibb.co/TWc28cZ/filtersortmobile.png)
+![ebazaar](https://i.ibb.co/TWc28cZ/filtersortmobile.png)
 
 ### Home Mobile view
 
-![Flixxit Home](https://i.ibb.co/JFtSMqw/home-mobile.png)
+![ebazaar](https://i.ibb.co/JFtSMqw/home-mobile.png)
 
 
 
