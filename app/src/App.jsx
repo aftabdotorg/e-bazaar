@@ -16,7 +16,7 @@ import { selectLoggedUser } from "./components/auth/authSlice";
 import PageNotFound from "./pages/PageNotFound";
 import OrderPlacedPage from "./pages/OrderPlacedPage";
 import UserProfile from "./components/User/UserProfile";
-import Logout from "./components/auth/logout/logout";
+import Logout from "./components/auth/logout/Logout";
 
 
 const App = () => {
