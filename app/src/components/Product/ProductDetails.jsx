@@ -115,7 +115,6 @@ const ProductDetails = () => {
     e.preventDefault();
     if (cartItems.findIndex((item) => item.product.id === product.id) < 0) {
       const newItem = {
-       
         product: product.id,
         quantity: 1,
         user: user.id,
@@ -125,6 +124,14 @@ const ProductDetails = () => {
       alert("Item Already Added.");
     }
   };
+
+  const fallbackImages = [
+    "https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/16978385/pexels-photo-16978385/free-photo-of-laptop-lying-on-the-desk-office-spaces.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/341523/pexels-photo-341523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/1298601/pexels-photo-1298601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  ];
 
   return (
     <Container>
@@ -138,7 +145,11 @@ const ProductDetails = () => {
           <Wrapper>
             <ImgContainer>
               {product.images?.map((image, i) => (
-                <Image src={product.images[i]} alt={product.title} key={i} />
+                <Image
+                  src={product.images[i] && fallbackImages[i]}
+                  alt={product.title}
+                  key={i}
+                />
               ))}
             </ImgContainer>
             <InfoContainer>

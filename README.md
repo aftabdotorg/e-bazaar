@@ -2,8 +2,9 @@
 
 Ebazaar is an e-commerce responsive website with an elegant and pleasing user interface and seamless user-friendly user experience.
 
-#### live-  https://e-bazaar-front.vercel.app/
-#### api-   https://e-bazaar-sage.vercel.app/   
+#### live-  <https://e-bazaar-front.vercel.app/>
+
+#### api-   <https://e-bazaar-sage.vercel.app/>
 
 ![Ebazaar](https://i.ibb.co/615PqWf/home-large.png)
 
@@ -33,38 +34,40 @@ Profile page displays details of users including Name, Email and addresses.
 **Responsiveness:**<br />
 All the pages are Universally responsive to all devices for.  
 
-
-## Pages :
+## Pages
 
 - #### Open routes
-    - Home
-    - Products
-    - Login
-    - Sign up
+
+  - Home
+  - Products
+  - Login
+  - Sign up
 
 - #### Authorised
-    - Profile
-    - Product Detail
-    - Cart
-    - Checkout
-    - Order Placed
 
-## Teck Stack :
+  - Profile
+  - Product Detail
+  - Cart
+  - Checkout
+  - Order Placed
+
+## Teck Stack
 
 - ### Frontend
-    - React
-    - Redux Toolkit
-    - React Router Dom
-    - Styled Components
+
+  - React
+  - Redux Toolkit
+  - React Router Dom
+  - Styled Components
 
 - ### Backend
-    - MongoDB
-    - Express
-    - Node
-    - Mongoose
 
+  - MongoDB
+  - Express
+  - Node
+  - Mongoose
 
-## Project Setup :
+## Project Setup
 
 - Clone entire project repo.
 - **Setting up client :**
@@ -95,26 +98,31 @@ All the pages are Universally responsive to all devices for.
 ![Filtering](https://i.ibb.co/9bXhfMb/productslarge.png)
 
 ### Product Detail page
+
 ` Authorized route `
 
 ![detail](https://i.ibb.co/dGwr1pQ/productpage.png)
 
 ### Cart page
+
 ` Authorized route `
 
 ![cart](https://i.ibb.co/7Q6Syjb/cart.png)
 
 ### Checkout page
+
 ` Authorized route `
 
 ![checkout](https://i.ibb.co/vY2N9YJ/checkoutform.png)
 
 ### Order placed page
+
 ` Authorized route `
 
 ![ebazaar](https://i.ibb.co/DpzCVJ0/orderplaced.png)
 
-### Profile Page 
+### Profile Page
+
 ` Authorized route `
 
 ![ebazaar](https://i.ibb.co/vcJMWt5/profile.png)
@@ -126,7 +134,3 @@ All the pages are Universally responsive to all devices for.
 ### Home Mobile view
 
 ![ebazaar](https://i.ibb.co/JFtSMqw/home-mobile.png)
-
-
-
-

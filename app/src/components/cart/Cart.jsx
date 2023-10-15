@@ -180,7 +180,7 @@ const Cart = () => {
   );
 
   const handleItemCount = (e, product) => {
-    dispatch(updateToCartAsync({ id:product.id, quantity: +e.target.value }));
+    dispatch(updateToCartAsync({ id: product.id, quantity: +e.target.value }));
   };
 
   const handleRemove = (e, id) => {
@@ -207,7 +207,12 @@ const Cart = () => {
               {products.map((item) => (
                 <Product key={item.id}>
                   <ProductDetail>
-                    <Image src={item.product.thumbnail} />
+                    <Image
+                      src={
+                        item.product.thumbnail &&
+                        "https://images.pexels.com/photos/1298601/pexels-photo-1298601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      }
+                    />
                     <Details>
                       <ProductName>
                         <b>Product:</b> {item.product.title}
@@ -233,7 +238,9 @@ const Cart = () => {
                         <option value="5">5</option>
                       </select>
                     </ProductAmountContainer>
-                    <ProductPrice>$ {discountedPrice(item.product)}</ProductPrice>
+                    <ProductPrice>
+                      $ {discountedPrice(item.product)}
+                    </ProductPrice>
                   </PriceDetail>
                   <TopButton onClick={(e) => handleRemove(e, item.id)}>
                     remove
