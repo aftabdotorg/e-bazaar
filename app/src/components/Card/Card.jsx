@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import "./Card.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductAsync, selectProductById } from "../Product/productSlice";
+import { selectProductById } from "../Product/productSlice";
 import { selectLoggedUser } from "../auth/authSlice";
 import { addToCartAsync } from "../cart/cartSlice";
 import { discountedPrice } from "../../utils/helper";
@@ -86,21 +86,10 @@ const Card = ({ item }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
 
-  const handleRemove = (e, id) => {
-
-    dispatch(deleteProductAsync(id))
-  }
 
   return (
     <Container>
-      <NavLink
-        to={
-          user?.role === "admin"
-            ? `/admin/products/${item.id}`
-            : `/products/${item.id}`
-        }
-        className="no_decoration"
-      >
+      <NavLink to={`/products/${item.id}`} className="no_decoration">
         <ImageParent className="image_parent">
           <Image src={item.thumbnail} alt={item.title} className="img1" />
         </ImageParent>
@@ -112,37 +101,13 @@ const Card = ({ item }) => {
           <FontAwesomeIcon icon={faStar} style={{ color: "#5c176b" }} />{" "}
           {item.rating}
         </Text>
-        <Text>
-          ₹ {discountedPrice(item)}
-        </Text>
+        <Text>₹ {discountedPrice(item)}</Text>
         <Text>₹ {item.price}</Text>
       </PriceParent>
       <BtnContainer>
-        {user?.role === "admin" ? (
-          <>
-            <NavLink
-              to={`/admin/products/${item.id}`}
-              className="no_decoration"
-            >
-              <Button>View</Button>
-            </NavLink>
-
-            <Button
-              style={{
-                backgroundColor: "maroon",
-                color: "white",
-              }}
-
-              onClick={(e) => handleRemove(e,item.id)}
-            >
-              Delete
-            </Button>
-          </>
-        ) : (
-          <NavLink to={`/products/${item.id}`} className="no_decoration">
-            <Button>View Details</Button>
-          </NavLink>
-        )}
+        <NavLink to={`/products/${item.id}`} className="no_decoration">
+          <Button>View Details</Button>
+        </NavLink>
       </BtnContainer>
     </Container>
   );

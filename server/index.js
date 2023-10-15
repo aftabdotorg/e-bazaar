@@ -10,7 +10,6 @@ const brandsRouter = require("./routes/Brands");
 const authRouter = require("./routes/Auth");
 const usersRouter = require("./routes/User");
 const cartRouter = require("./routes/Cart");
-const orderRouter = require("./routes/Orders");
 const PORT = process.env.PORT;
 
 //middlewares
@@ -26,7 +25,6 @@ app.use("/brands", brandsRouter.router);
 app.use("/users", usersRouter.router);
 app.use("/auth", authRouter.router);
 app.use("/cart", cartRouter.router);
-app.use("/orders", orderRouter.router);
 
 main().catch((err) => console.log(err));
 

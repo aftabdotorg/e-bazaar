@@ -17,11 +17,7 @@ import PageNotFound from "./pages/PageNotFound";
 import OrderPlacedPage from "./pages/OrderPlacedPage";
 import UserProfile from "./components/User/UserProfile";
 import Logout from "./components/auth/logout/logout";
-import ProtectedAdmin from "./components/auth/ProtectedAdmin";
-import AdminProducts from "./pages/AdminProducts";
-import AdminSingleProductPage from "./pages/AdminSingleProductPage";
-import AdminProductForm from "./components/Admin/AdminProductForm";
-import AdminOrdersPage from "./pages/AdminOrdersPage";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,17 +35,13 @@ const App = () => {
         <Route
           path="/"
           element={
-            // <Protected>
-              <Home />
-            // </Protected>
+            <Home />
           }
         ></Route>
         <Route
           path="/products"
           element={
-            // <Protected>
-              <Products />
-            // </Protected>
+            <Products />
           }
         ></Route>
 
@@ -72,7 +64,7 @@ const App = () => {
         ></Route>
         <Route path="/register" element={<SignupPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/order-placed/:id" element={<OrderPlacedPage />}></Route>
+        <Route path="/order-placed" element={<OrderPlacedPage />}></Route>
         <Route
           path="/profile"
           element={
@@ -91,40 +83,6 @@ const App = () => {
           }
         ></Route>
         <Route path="*" element={<PageNotFound />}></Route>
-
-        {/* admin routes */}
-        <Route
-          path="/admin/products"
-          element={
-            <ProtectedAdmin>
-              <AdminProducts />
-            </ProtectedAdmin>
-          }
-        ></Route>
-        <Route
-          path="/admin/products/:id"
-          element={
-            <ProtectedAdmin>
-              <AdminSingleProductPage />
-            </ProtectedAdmin>
-          }
-        ></Route>
-        <Route
-          path="/admin/add-product"
-          element={
-            <ProtectedAdmin>
-              <AdminProductForm />
-            </ProtectedAdmin>
-          }
-        ></Route>
-        <Route
-          path="/admin/orders"
-          element={
-            <ProtectedAdmin>
-              <AdminOrdersPage />
-            </ProtectedAdmin>
-          }
-        ></Route>
       </Routes>
       <Footer />
     </>

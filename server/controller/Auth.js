@@ -13,7 +13,6 @@ exports.createUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email }).exec();
-    console.log({ user });
 
     if (!user) {
       res.status(401).json({ message: "invalid user" });

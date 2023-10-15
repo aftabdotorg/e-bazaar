@@ -5,11 +5,7 @@ import { selectLoggedUser, updateUserAsync } from "../auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { selectCartItems } from "../cart/cartSlice";
-import {
-  createOrderAsync,
-  selectCurrentOrder,
-} from "../Orders/OrderSlice";
-import { Navigate } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { discountedPrice } from "../../utils/helper";
 
 const Container = styled.div`
@@ -64,7 +60,7 @@ const Checkout = () => {
 
   const user = useSelector(selectLoggedUser);
   const selectedCartItems = useSelector(selectCartItems);
-  const currentOrder = useSelector(selectCurrentOrder);
+  // const currentOrder = useSelector(selectCurrentOrder);
 
   const totalItems = selectedCartItems.reduce(
     (total, item) => item.quantity + total,
@@ -78,7 +74,6 @@ const Checkout = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMode, setPaymentMode] = useState("cash");
 
-  console.log(user);
   const handleAddress = (e) => {
     setSelectedAddress(user.addresses[e.target.value]);
   };
@@ -86,25 +81,10 @@ const Checkout = () => {
     setPaymentMode(e.target.value);
   };
 
-  const handlePlaceOrder = () => {
-    const newOrder = {
-      selectedCartItems,
-      totalItems,
-      totalPrice,
-      user,
-      paymentMode,
-      selectedAddress,
-      status: "pending",
-    };
 
-    dispatch(createOrderAsync(newOrder));
-  };
 
   return (
     <>
-      {currentOrder && (
-        <Navigate to={`/order-placed/${currentOrder.id}`} replace={true}></Navigate>
-      )}
       <Container>
         <h3>Personal Information</h3>
         <Form
@@ -251,7 +231,9 @@ const Checkout = () => {
           </Flexer>
         </InputContainer>
 
-        <Button onClick={handlePlaceOrder}>Place Order</Button>
+        <NavLink to={"/order-placed"}>
+          <Button>Place Order</Button>
+        </NavLink>
       </Container>
     </>
   );

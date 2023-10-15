@@ -43,7 +43,6 @@ export const authenticateUserAsync = createAsyncThunk(
       const response = await authenticateUser(loginInfo);
       return response.data;
     } catch (error) {
-      // console.log(error);
       return rejectWithValue(error.message);
     }
   }

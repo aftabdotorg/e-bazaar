@@ -1,15 +1,5 @@
 const { Product } = require("../model/Product");
 
-exports.createProduct = async (req, res) => {
-  const product = new Product(req.body);
-  try {
-    const doc = await product.save();
-    res.status(201).json(doc);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-};
-
 exports.fetchAllProducts = async (req, res) => {
   let query = Product.find({});
   let totalProductsQuery = Product.find({});
@@ -29,7 +19,6 @@ exports.fetchAllProducts = async (req, res) => {
   }
 
   const totalDocs = await totalProductsQuery.count().exec();
-  // console.log({ totalDocs });
 
   if (req.query._page && req.query._limit) {
     const pageSize = req.query._limit;

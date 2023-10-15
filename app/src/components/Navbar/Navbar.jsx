@@ -14,7 +14,6 @@ import { medium, mobile, tablet } from "../../utils/responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser } from "../auth/authSlice";
 import { selectCartItems } from "../cart/cartSlice";
-import { selectAllOrders } from "../Orders/OrderSlice";
 
 const NavContainer = styled.div`
   height: 60px;
@@ -144,7 +143,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedUser);
   const cartItems = useSelector(selectCartItems);
-  const orders = useSelector(selectAllOrders);
 
   return (
     <NavContainer>
@@ -154,15 +152,10 @@ const Navbar = () => {
           <NavLink to={`/`} className="no_decoration">
             <MenuItem>Home</MenuItem>
           </NavLink>
-          {user?.role === "admin" ? (
-            <NavLink to={`/admin/products`} className="no_decoration">
-              <MenuItem>Products</MenuItem>
-            </NavLink>
-          ) : (
-            <NavLink to={`/products`} className="no_decoration">
-              <MenuItem>Products</MenuItem>
-            </NavLink>
-          )}
+
+          <NavLink to={`/products`} className="no_decoration">
+            <MenuItem>Products</MenuItem>
+          </NavLink>
         </Left>
         <Center>
           <SearchContainer>
@@ -174,61 +167,31 @@ const Navbar = () => {
           </SearchContainer>
         </Center>
         <Right>
-          {user?.role === "admin" ? (
-            <NavLink to="/admin/orders" className="no_decoration">
+          <NavLink to="/cart" className="no_decoration">
+            <MenuItem>
+              <FontAwesomeIcon icon={faCartShopping} />
+              {cartItems.length > 0 && (
+                <sup
+                  style={{
+                    marginLeft: "2px",
+                    padding: "0 4px",
+                    borderRadius: "7px",
+                    color: "white",
+                    backgroundColor: "#713d7e",
+                  }}
+                >
+                  {cartItems.length}
+                </sup>
+              )}
+            </MenuItem>
+          </NavLink>
+
+          {user ? (
+            <NavLink to={`/profile`} className="no_decoration">
               <MenuItem>
-                Orders
-                {orders.length > 0 && (
-                  <sup
-                    style={{
-                      marginLeft: "2px",
-                      padding: "0 4px",
-                      borderRadius: "7px",
-                      color: "white",
-                      backgroundColor: "#713d7e",
-                    }}
-                  >
-                    {orders.length}
-                  </sup>
-                )}
+                <FontAwesomeIcon icon={faUser} /> {user.name}
               </MenuItem>
             </NavLink>
-          ) : (
-            user && (
-              <NavLink to="/cart" className="no_decoration">
-                <MenuItem>
-                  <FontAwesomeIcon icon={faCartShopping} />
-                  {cartItems.length > 0 && (
-                    <sup
-                      style={{
-                        marginLeft: "2px",
-                        padding: "0 4px",
-                        borderRadius: "7px",
-                        color: "white",
-                        backgroundColor: "#713d7e",
-                      }}
-                    >
-                      {cartItems.length}
-                    </sup>
-                  )}
-                </MenuItem>
-              </NavLink>
-            )
-          )}
-          {user ? (
-            user.role === "admin" ? (
-              <NavLink to={`/admin/orders`} className="no_decoration">
-                <MenuItem>
-                  <FontAwesomeIcon icon={faUser} /> {user.name}
-                </MenuItem>
-              </NavLink>
-            ) : (
-              <NavLink to={`/profile`} className="no_decoration">
-                <MenuItem>
-                  <FontAwesomeIcon icon={faUser} /> {user.name}
-                </MenuItem>
-              </NavLink>
-            )
           ) : (
             <NavLink to={`/register`} className="no_decoration">
               <MenuItem>
@@ -236,7 +199,6 @@ const Navbar = () => {
               </MenuItem>
             </NavLink>
           )}
-
           {user ? (
             <NavLink to={`/logout`} className="no_decoration">
               <MenuItem>
