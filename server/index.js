@@ -15,6 +15,8 @@ const PORT = process.env.PORT;
 //middlewares
 app.use(
   cors({
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
     exposedHeaders: ["X-Total-Count"],
   })
 );
