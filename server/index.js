@@ -12,7 +12,7 @@ const usersRouter = require("./routes/User");
 const cartRouter = require("./routes/Cart");
 const PORT = process.env.PORT;
 
-//middlewares
+//middlewares for cors
 app.use(
   cors({
     origin: "*",
