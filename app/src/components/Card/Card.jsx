@@ -92,8 +92,9 @@ const Card = ({ item }) => {
         <ImageParent className="image_parent">
           <Image
             src={
-              item.thumbnail &&
-              "https://images.pexels.com/photos/16978385/pexels-photo-16978385/free-photo-of-laptop-lying-on-the-desk-office-spaces.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              item.thumbnail
+                ? item.thumbnail
+                : "https://images.pexels.com/photos/16978385/pexels-photo-16978385/free-photo-of-laptop-lying-on-the-desk-office-spaces.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             }
             alt={item.title}
             className="img1"

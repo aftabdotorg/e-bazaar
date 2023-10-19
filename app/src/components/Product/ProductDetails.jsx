@@ -146,7 +146,9 @@ const ProductDetails = () => {
             <ImgContainer>
               {product.images?.map((image, i) => (
                 <Image
-                  src={product.images[i] && fallbackImages[i]}
+                  src={
+                    product.images[i] ? product.images[i] : fallbackImages[i]
+                  }
                   alt={product.title}
                   key={i}
                 />
