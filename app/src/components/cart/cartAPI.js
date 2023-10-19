@@ -12,9 +12,9 @@ export function addToCart(item) {
   });
 }
 
-export function fetchCartItemsById(userid) {
+export function fetchCartItemsById() {
   return new Promise(async (resolve) => {
-    const response = await fetch("https://e-bazaar-sage.vercel.app/cart?user=" + userid);
+    const response = await fetch("https://e-bazaar-sage.vercel.app/cart");
     const data = await response.json();
     resolve({ data });
   });

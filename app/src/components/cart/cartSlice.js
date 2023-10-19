@@ -14,8 +14,8 @@ const initialState = {
 
 export const fetchCartItemsByIdAsync = createAsyncThunk(
   "cart/fetchCartItemsById",
-  async (userid) => {
-    const response = await fetchCartItemsById(userid);
+  async () => {
+    const response = await fetchCartItemsById();
     return response.data;
   }
 );
